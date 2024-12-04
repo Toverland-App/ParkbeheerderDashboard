@@ -171,3 +171,4 @@ namespace ParkbeheerderDashboard
         public string Opmerkingen { get; set; }
     }
 }
+

@@ -11,213 +11,239 @@
         </Grid.Background>
 
         <!-- Links menu -->
-        <StackPanel Orientation="Vertical" Width="200" HorizontalAlignment="Left" Background="White">
-            <RadioButton Name="InformatiebordButton"
-                         Content="Informatiebord"
-                         FontSize="16"
-                         Margin="20,20,0,10"
-                         FontWeight="Bold"
-                         GroupName="Menu"
-                         Checked="InformatiebordButton_Checked" />
-            <RadioButton Name="AttractiesButton"
-                         Content="Attracties"
-                         FontSize="16"
-                         Margin="20,10,0,10"
-                         FontWeight="Bold"
-                         GroupName="Menu"
-                         Checked="AttractiesButton_Checked" />
-            <RadioButton Name="PersoneelButton"
-                         Content="Personeel"
-                         FontSize="16"
-                         Margin="20,10,0,10"
-                         FontWeight="Bold"
-                         GroupName="Menu"
-                         Checked="PersoneelButton_Checked" />
-            <RadioButton Name="GebiedenButton"
-                         Content="Gebieden"
-                         FontSize="16"
-                         Margin="20,10,0,10"
-                         FontWeight="Bold"
-                         GroupName="Menu"
-                         Checked="GebiedenButton_Checked" />
-            <RadioButton Name="BezoekersButton"
-                         Content="Bezoekers"
-                         FontSize="16"
-                         Margin="20,10,0,10"
-                         FontWeight="Bold"
-                         GroupName="Menu"
-                         Checked="BezoekersButton_Checked" />
-            <RadioButton Name="OnderhoudButton"
-                         Content="Onderhoud"
-                         FontSize="16"
-                         Margin="20,10,0,10"
-                         FontWeight="Bold"
-                         GroupName="Menu"
-                         Checked="OnderhoudButton_Checked" />
-            <RadioButton Name="FeedbackButton"
-                         Content="Feedback"
-                         FontSize="16"
-                         Margin="20,10,0,10"
-                         FontWeight="Bold"
-                         GroupName="Menu"
-                         Checked="FeedbackButton_Checked" />
-        </StackPanel>
-
-        <!-- Content grid -->
-        <Grid Name="ContentGrid" Margin="200,0,0,0">
-            <!-- Informatiebord Content -->
-            <StackPanel Name="InformatiebordContent" Visibility="Collapsed">
-                <TextBlock Text="Informatiebord"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Margin="30,20,0,0" />
-                <TextBlock Text="Hello World!"
-                           TextWrapping="Wrap"
-                           Margin="30,70,30,0" />
+        <DockPanel LastChildFill="True">
+            <StackPanel Orientation="Vertical" Width="200" Background="White" DockPanel.Dock="Left">
+                <RadioButton Name="InformatiebordButton"
+                             Content="Informatiebord"
+                             FontSize="16"
+                             Margin="20,20,0,10"
+                             FontWeight="Bold"
+                             GroupName="Menu"
+                             Checked="InformatiebordButton_Checked" />
+                <RadioButton Name="AttractiesButton"
+                             Content="Attracties"
+                             FontSize="16"
+                             Margin="20,10,0,10"
+                             FontWeight="Bold"
+                             GroupName="Menu"
+                             Checked="AttractiesButton_Checked" />
+                <RadioButton Name="PersoneelButton"
+                             Content="Personeel"
+                             FontSize="16"
+                             Margin="20,10,0,10"
+                             FontWeight="Bold"
+                             GroupName="Menu"
+                             Checked="PersoneelButton_Checked" />
+                <RadioButton Name="GebiedenButton"
+                             Content="Gebieden"
+                             FontSize="16"
+                             Margin="20,10,0,10"
+                             FontWeight="Bold"
+                             GroupName="Menu"
+                             Checked="GebiedenButton_Checked" />
+                <RadioButton Name="BezoekersButton"
+                             Content="Bezoekers"
+                             FontSize="16"
+                             Margin="20,10,0,10"
+                             FontWeight="Bold"
+                             GroupName="Menu"
+                             Checked="BezoekersButton_Checked" />
+                <RadioButton Name="OnderhoudButton"
+                             Content="Onderhoud"
+                             FontSize="16"
+                             Margin="20,10,0,10"
+                             FontWeight="Bold"
+                             GroupName="Menu"
+                             Checked="OnderhoudButton_Checked" />
+                <RadioButton Name="FeedbackButton"
+                             Content="Feedback"
+                             FontSize="16"
+                             Margin="20,10,0,10"
+                             FontWeight="Bold"
+                             GroupName="Menu"
+                             Checked="FeedbackButton_Checked" />
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="20,10,0,10">
+                    <Image Source="C:\Users\sjors\OneDrive - Office 365 Fontys\Bureaublad\Verdieping\Software\ParkbeheerderDashboard\Toverland_logo.png" Width="180" Height="100"/>
+                </StackPanel>
             </StackPanel>
 
-            <!-- Attracties Content -->
-            <StackPanel Name="AttractiesContent" Visibility="Collapsed">
-                <TextBlock Text="Attracties"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Margin="30,20,0,0" />
+            <!-- Content grid -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <Grid Name="ContentGrid" Margin="10">
+                    <!-- Informatiebord Content -->
+                    <StackPanel Name="InformatiebordContent" Visibility="Collapsed">
+                        <TextBlock Text="Informatiebord"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Margin="30,20,0,0" />
+                        <TextBlock Text="Hello World!"
+                                   TextWrapping="Wrap"
+                                   Margin="30,70,30,0" />
+                    </StackPanel>
 
-                <!-- Tabs -->
-                <TabControl HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Margin="30,70,30,0"
-                            Width="500"
-                            Height="400">
-                    <!-- Nieuwe Status Tab -->
-                    <TabItem Header="Nieuwe status">
-                        <Grid>
-                            <!-- Dropdown voor Attractie -->
-                            <ComboBox Name="AttractieComboBox"
-                                      Width="200"
-                                      HorizontalAlignment="Left"
-                                      VerticalAlignment="Top"
-                                      Margin="30,30,0,0" />
+                    <!-- Attracties Content -->
+                    <Grid Name="AttractiesContent" Visibility="Collapsed" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Attracties"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Margin="30,20,0,0" Grid.Row="0"/>
 
-                            <!-- Dropdown voor Status -->
-                            <ComboBox Name="StatusComboBox"
-                                      Width="200"
-                                      HorizontalAlignment="Right"
-                                      VerticalAlignment="Top"
-                                      Margin="0,30,30,0">
-                                <!-- Options will be added in code-behind -->
-                            </ComboBox>
+                        <!-- Tabs -->
+                        <TabControl HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Margin="30,20,30,20"
+                                    Grid.Row="1">
+                            <!-- Nieuwe Status Tab -->
+                            <TabItem Header="Nieuwe status">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                            <!-- Opmerkingen -->
-                            <TextBox Name="OpmerkingenBox"
-                                     Width="400"
-                                     Height="100"
-                                     HorizontalAlignment="Center"
-                                     VerticalAlignment="Top"
-                                     Margin="0,100,0,0"
-                                     TextWrapping="Wrap"
-                                     AcceptsReturn="True"
-                                     GotFocus="OpmerkingenBox_GotFocus"
-                                     LostFocus="OpmerkingenBox_LostFocus"
-                                     Text="Voer opmerkingen in..."
-                                     Foreground="Gray" />
+                                    <!-- Dropdown voor Attractie -->
+                                    <ComboBox Name="AttractieComboBox"
+                                              Width="200"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top"
+                                              Margin="30,30,0,0"
+                                              Grid.Row="0" Grid.Column="0"/>
 
-                            <!-- Post knop -->
-                            <Button Content="Post"
-                                    Width="100"
-                                    Height="40"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
-                                    Margin="0,0,0,30"
-                                    Background="#4CAF50"
-                                    Foreground="White"
-                                    FontSize="16"
-                                    BorderBrush="Green"
-                                    Click="PostButton_Click" />
-                        </Grid>
-                    </TabItem>
+                                    <!-- Dropdown voor Status -->
+                                    <ComboBox Name="StatusComboBox"
+                                              Width="200"
+                                              HorizontalAlignment="Right"
+                                              VerticalAlignment="Top"
+                                              Margin="0,30,30,0"
+                                              Grid.Row="0" Grid.Column="1">
+                                        <!-- Options will be added in code-behind -->
+                                    </ComboBox>
 
-                    <!-- Status Aanpassen Tab -->
-                    <TabItem Header="Status aanpassen">
-                        <Grid>
-                            <ListView Name="StatusListView" Margin="10">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="Attractie" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="150"/>
-                                        <GridViewColumn Header="Opmerkingen" DisplayMemberBinding="{Binding Opmerkingen}" Width="200"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </Grid>
-                    </TabItem>
-                </TabControl>
-            </StackPanel>
+                                    <!-- Opmerkingen -->
+                                    <TextBox Name="OpmerkingenBox"
+                                             Width="400"
+                                             Height="100"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Top"
+                                             Margin="0,30,0,0"
+                                             TextWrapping="Wrap"
+                                             AcceptsReturn="True"
+                                             GotFocus="OpmerkingenBox_GotFocus"
+                                             LostFocus="OpmerkingenBox_LostFocus"
+                                             Text="Voer opmerkingen in..."
+                                             Foreground="Gray"
+                                             Grid.Row="1" Grid.ColumnSpan="2"/>
 
-            <!-- Placeholder content for other sections -->
-            <StackPanel Name="PersoneelContent" Visibility="Collapsed">
-                <TextBlock Text="Personeel"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Margin="30,20,0,0" />
-                <TextBlock Text="Hello World!"
-                           TextWrapping="Wrap"
-                           Margin="30,70,30,0" />
-            </StackPanel>
+                                    <!-- Post knop -->
+                                    <Button Content="Post"
+                                            Width="100"
+                                            Height="40"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            Margin="0,0,0,30"
+                                            Background="#4CAF50"
+                                            Foreground="White"
+                                            FontSize="16"
+                                            BorderBrush="Green"
+                                            Click="PostButton_Click"
+                                            Grid.Row="3" Grid.ColumnSpan="2"/>
+                                </Grid>
+                            </TabItem>
 
-            <StackPanel Name="GebiedenContent" Visibility="Collapsed">
-                <TextBlock Text="Gebieden"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Margin="30,20,0,0" />
-                <TextBlock Text="Hello World!"
-                           TextWrapping="Wrap"
-                           Margin="30,70,30,0" />
-            </StackPanel>
+                            <!-- Status Aanpassen Tab -->
+                            <TabItem Header="Status aanpassen">
+                                <Grid>
+                                    <ListView Name="StatusListView" Margin="10">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="Attractie" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="150"/>
+                                                <GridViewColumn Header="Opmerkingen" DisplayMemberBinding="{Binding Opmerkingen}" Width="200"/>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
 
-            <StackPanel Name="BezoekersContent" Visibility="Collapsed">
-                <TextBlock Text="Bezoekers"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Margin="30,20,0,0" />
-                <TextBlock Text="Hello World!"
-                           TextWrapping="Wrap"
-                           Margin="30,70,30,0" />
-            </StackPanel>
+                    <!-- Placeholder content for other sections -->
+                    <StackPanel Name="PersoneelContent" Visibility="Collapsed">
+                        <TextBlock Text="Personeel"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Margin="30,20,0,0" />
+                        <TextBlock Text="Hello World!"
+                                   TextWrapping="Wrap"
+                                   Margin="30,70,30,0" />
+                    </StackPanel>
 
-            <StackPanel Name="OnderhoudContent" Visibility="Collapsed">
-                <TextBlock Text="Onderhoud"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Margin="30,20,0,0" />
-                <TextBlock Text="Hello World!"
-                           TextWrapping="Wrap"
-                           Margin="30,70,30,0" />
-            </StackPanel>
+                    <StackPanel Name="GebiedenContent" Visibility="Collapsed">
+                        <TextBlock Text="Gebieden"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Margin="30,20,0,0" />
+                        <TextBlock Text="Hello World!"
+                                   TextWrapping="Wrap"
+                                   Margin="30,70,30,0" />
+                    </StackPanel>
 
-            <StackPanel Name="FeedbackContent" Visibility="Collapsed">
-                <TextBlock Text="Feedback"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Margin="30,20,0,0" />
-                <TextBlock Text="Hello World!"
-                           TextWrapping="Wrap"
-                           Margin="30,70,30,0" />
-            </StackPanel>
-        </Grid>
+                    <StackPanel Name="BezoekersContent" Visibility="Collapsed">
+                        <TextBlock Text="Bezoekers"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Margin="30,20,0,0" />
+                        <TextBlock Text="Hello World!"
+                                   TextWrapping="Wrap"
+                                   Margin="30,70,30,0" />
+                    </StackPanel>
+
+                    <StackPanel Name="OnderhoudContent" Visibility="Collapsed">
+                        <TextBlock Text="Onderhoud"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Margin="30,20,0,0" />
+                        <TextBlock Text="Hello World!"
+                                   TextWrapping="Wrap"
+                                   Margin="30,70,30,0" />
+                    </StackPanel>
+
+                    <StackPanel Name="FeedbackContent" Visibility="Collapsed">
+                        <TextBlock Text="Feedback"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Margin="30,20,0,0" />
+                        <TextBlock Text="Hello World!"
+                                   TextWrapping="Wrap"
+                                   Margin="30,70,30,0" />
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </DockPanel>
     </Grid>
 </Window>
+
