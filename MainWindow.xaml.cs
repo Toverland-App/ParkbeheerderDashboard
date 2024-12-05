@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -48,15 +50,31 @@ namespace ParkbeheerderDashboard
             }
         }
 
-        private void InitializeStatusComboBox()
+        private async void InitializeStatusComboBox()
         {
             StatusComboBox.Items.Clear();
             StatusComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer status" });
-            StatusComboBox.Items.Add(new ComboBoxItem { Content = "Storing" });
-            StatusComboBox.Items.Add(new ComboBoxItem { Content = "Onderhoud" });
-            StatusComboBox.Items.Add(new ComboBoxItem { Content = "Weersomstandigheden" });
+
+            // Fetch maintenance data and add unique statuses
+            try
+            {
+                var maintenanceList = await _apiService.GetMaintenanceAsync();
+                var uniqueStatuses = new HashSet<string>(maintenanceList.Select(m => m.Status));
+
+                foreach (var status in uniqueStatuses)
+                {
+                    StatusComboBox.Items.Add(new ComboBoxItem { Content = status });
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Error fetching maintenance statuses: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             StatusComboBox.SelectedIndex = 0;
         }
+
+
 
         private void InitializePlaceholders()
         {

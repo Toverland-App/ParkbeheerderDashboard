@@ -1,4 +1,4 @@
-namespace ParkbeheerderDashboard
+namespace ParkbeheerderDashboard.Models
 {
     public class Attraction
     {

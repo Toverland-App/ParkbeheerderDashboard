@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ParkbeheerderDashboard.Models;
 
 namespace ParkbeheerderDashboard
 {
@@ -19,5 +21,12 @@ namespace ParkbeheerderDashboard
             var response = await _httpClient.GetStringAsync("https://localhost:7129/api/Attraction");
             return JsonConvert.DeserializeObject<List<Attraction>>(response);
         }
+
+        public async Task<List<Maintenance>> GetMaintenanceAsync()
+        {
+            var response = await _httpClient.GetStringAsync("https://localhost:7129/api/Maintenance");
+            return JsonConvert.DeserializeObject<List<Maintenance>>(response);
+        }
+
     }
 }
