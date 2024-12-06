@@ -54,7 +54,7 @@ namespace ParkbeheerderDashboard
             StatusComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer status" });
 
             // Add predefined statuses
-            var predefinedStatuses = new List<string> { "Operational", "Maintenance", "Closed" };
+            var predefinedStatuses = new List<string> { "Onderhoud", "Storing", "Weersomstandigheden" };
 
             foreach (var status in predefinedStatuses)
             {
