@@ -28,5 +28,10 @@ namespace ParkbeheerderDashboard
             return JsonConvert.DeserializeObject<List<Maintenance>>(response);
         }
 
+        public async Task<List<AttractionStatus>> GetAttractionStatusesAsync()
+        {
+            var response = await _httpClient.GetStringAsync("https://localhost:7129/api/AttractionMaintenance/GetAllMaintenances");
+            return JsonConvert.DeserializeObject<List<AttractionStatus>>(response);
+        }
     }
 }

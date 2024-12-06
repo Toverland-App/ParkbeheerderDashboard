@@ -108,7 +108,7 @@ namespace ParkbeheerderDashboard
                 LoadStatusListView();
             }
         }
-
+    
         private void LoadStatusListView()
         {
             StatusListView.ItemsSource = null;
