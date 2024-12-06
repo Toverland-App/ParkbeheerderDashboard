@@ -50,29 +50,22 @@ namespace ParkbeheerderDashboard
             }
         }
 
-        private async void InitializeStatusComboBox()
+        private void InitializeStatusComboBox()
         {
             StatusComboBox.Items.Clear();
             StatusComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer status" });
 
-            // Fetch maintenance data and add unique statuses
-            try
-            {
-                var maintenanceList = await _apiService.GetMaintenanceAsync();
-                var uniqueStatuses = new HashSet<string>(maintenanceList.Select(m => m.Status));
+            // Add predefined statuses
+            var predefinedStatuses = new List<string> { "", "Maintenance", "Closed" };
 
-                foreach (var status in uniqueStatuses)
-                {
-                    StatusComboBox.Items.Add(new ComboBoxItem { Content = status });
-                }
-            }
-            catch (HttpRequestException ex)
+            foreach (var status in predefinedStatuses)
             {
-                MessageBox.Show($"Error fetching maintenance statuses: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                StatusComboBox.Items.Add(new ComboBoxItem { Content = status });
             }
 
             StatusComboBox.SelectedIndex = 0;
         }
+
 
 
 
@@ -95,20 +88,37 @@ namespace ParkbeheerderDashboard
             }
             else
             {
-                // Logic to handle the post action
-                MessageBox.Show($"Attractie: {attractie}\nStatus: {status}\nOpmerkingen: {opmerkingen}", "Gegevens gepost", MessageBoxButton.OK, MessageBoxImage.Information);
+                try
+                {
+                    int attractionId = 3; // Use the provided attractionId
+                    bool success = await _apiService.AddMaintenanceAsync(attractionId, attractie, status, opmerkingen);
 
-                // Add the new status to the list
-                _attractionStatuses.Add(new AttractionStatus { Name = attractie, Status = status, Opmerkingen = opmerkingen });
+                    if (success)
+                    {
+                        MessageBox.Show("Gegevens succesvol gepost.", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Reset fields to their neutral position
-                await LoadAttractionsAsync();
-                InitializeStatusComboBox();
-                SetOpmerkingenBoxPlaceholder();
-                LoadStatusListView();
+                        // Add the new status to the list
+                        _attractionStatuses.Add(new AttractionStatus { Name = attractie, Status = status, Opmerkingen = opmerkingen });
+
+                        // Reset fields to their neutral position
+                        await LoadAttractionsAsync();
+                        InitializeStatusComboBox();
+                        SetOpmerkingenBoxPlaceholder();
+                        LoadStatusListView();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Er is een fout opgetreden bij het posten van de gegevens.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show($"Error posting data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
-    
+
+
         private void LoadStatusListView()
         {
             StatusListView.ItemsSource = null;
