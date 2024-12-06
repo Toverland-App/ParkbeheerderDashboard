@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -56,7 +54,7 @@ namespace ParkbeheerderDashboard
             StatusComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer status" });
 
             // Add predefined statuses
-            var predefinedStatuses = new List<string> { "", "Maintenance", "Closed" };
+            var predefinedStatuses = new List<string> { "Operational", "Maintenance", "Closed" };
 
             foreach (var status in predefinedStatuses)
             {
@@ -66,9 +64,6 @@ namespace ParkbeheerderDashboard
             StatusComboBox.SelectedIndex = 0;
         }
 
-
-
-
         private void InitializePlaceholders()
         {
             // Initialize placeholders for ComboBoxes
@@ -77,7 +72,6 @@ namespace ParkbeheerderDashboard
 
         private async void PostButton_Click(object sender, RoutedEventArgs e)
         {
-            // Implement the logic for the Post button click event
             string attractie = AttractieComboBox.Text;
             string status = StatusComboBox.Text;
             string opmerkingen = OpmerkingenBox.Text;
@@ -88,36 +82,18 @@ namespace ParkbeheerderDashboard
             }
             else
             {
-                try
-                {
-                    int attractionId = 3; // Use the provided attractionId
-                    bool success = await _apiService.AddMaintenanceAsync(attractionId, attractie, status, opmerkingen);
+                MessageBox.Show("Statusupdate doorgevoerd.", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    if (success)
-                    {
-                        MessageBox.Show("Gegevens succesvol gepost.", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Voeg de nieuwe status toe aan de lijst
+                _attractionStatuses.Add(new AttractionStatus { Name = attractie, Status = status, Opmerkingen = opmerkingen });
 
-                        // Add the new status to the list
-                        _attractionStatuses.Add(new AttractionStatus { Name = attractie, Status = status, Opmerkingen = opmerkingen });
-
-                        // Reset fields to their neutral position
-                        await LoadAttractionsAsync();
-                        InitializeStatusComboBox();
-                        SetOpmerkingenBoxPlaceholder();
-                        LoadStatusListView();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Er is een fout opgetreden bij het posten van de gegevens.", "Fout", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                catch (HttpRequestException ex)
-                {
-                    MessageBox.Show($"Error posting data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                // Reset velden naar hun neutrale positie
+                await LoadAttractionsAsync();
+                InitializeStatusComboBox();
+                SetOpmerkingenBoxPlaceholder();
+                LoadStatusListView();
             }
         }
-
 
         private void LoadStatusListView()
         {
@@ -199,4 +175,3 @@ namespace ParkbeheerderDashboard
         public string Opmerkingen { get; set; }
     }
 }
-
