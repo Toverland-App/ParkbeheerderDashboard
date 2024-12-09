@@ -35,14 +35,16 @@ namespace ParkbeheerderDashboard
             return JsonConvert.DeserializeObject<List<AttractionStatus>>(response);
         }
 
-        public async Task<bool> AddMaintenanceAsync(int attractionId, string attractie, string status, string opmerkingen)
+        public async Task<bool> AddMaintenanceAsync(int attractionId, string attractie, string status, string description)
         {
-            var maintenanceData = new
+            var maintenanceData = new Maintenance
             {
-                Attractie = attractie,
+                Description = description,
+                Date = DateTime.Now, // or any specific date
                 Status = status,
-                Opmerkingen = opmerkingen
+                AttractionId = attractionId
             };
+
 
             var json = JsonConvert.SerializeObject(maintenanceData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
