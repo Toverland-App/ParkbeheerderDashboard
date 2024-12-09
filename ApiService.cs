@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +49,27 @@ namespace ParkbeheerderDashboard
             var response = await _httpClient.PostAsync($"https://localhost:7129/api/AttractionMaintenance/AddMaintenance?attractionId={attractionId}", content);
 
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> UpdateAttractionStatusAsync(int attractionId, string status)
+        {
+            var statusData = new
+            {
+                Status = status
+            };
+
+            var json = JsonConvert.SerializeObject(statusData);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync($"https://localhost:7129/api/AttractionMaintenance/UpdateStatus?attractionId={attractionId}", content);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<List<Maintenance>> GetAllMaintenancesAsync()
+        {
+            var response = await _httpClient.GetStringAsync("https://localhost:7129/api/AttractionMaintenance/GetAllMaintenances");
+            return JsonConvert.DeserializeObject<List<Maintenance>>(response);
         }
     }
 }

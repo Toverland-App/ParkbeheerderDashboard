@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ParkbeheerderDashboard.Models;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,7 @@ namespace ParkbeheerderDashboard
         {
             await LoadAttractionsAsync();
             InitializeStatusComboBox();
+            await LoadMaintenancesAsync();
             LoadStatusListView();
         }
 
@@ -37,7 +39,7 @@ namespace ParkbeheerderDashboard
                     AttractieComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer attractie" });
                     foreach (var attraction in attractions)
                     {
-                        AttractieComboBox.Items.Add(new ComboBoxItem { Content = attraction.Name });
+                        AttractieComboBox.Items.Add(new ComboBoxItem { Content = attraction.Name, Tag = attraction });
                     }
                     AttractieComboBox.SelectedIndex = 0;
                 });
@@ -47,6 +49,7 @@ namespace ParkbeheerderDashboard
                 MessageBox.Show($"Error fetching attractions: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void InitializeStatusComboBox()
         {
@@ -82,23 +85,54 @@ namespace ParkbeheerderDashboard
             }
             else
             {
-                MessageBox.Show("Statusupdate doorgevoerd.", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Stuur de gegevens naar de API
+                var selectedAttraction = (ComboBoxItem)AttractieComboBox.SelectedItem;
+                int attractionId = selectedAttraction != null && selectedAttraction.Tag != null ? ((Attraction)selectedAttraction.Tag).Id : 0;
 
-                // Voeg de nieuwe status toe aan de lijst
-                _attractionStatuses.Add(new AttractionStatus { Name = attractie, Status = status, Opmerkingen = opmerkingen });
+                bool success = await _apiService.AddMaintenanceAsync(attractionId, attractie, status, opmerkingen);
 
-                // Reset velden naar hun neutrale positie
-                await LoadAttractionsAsync();
-                InitializeStatusComboBox();
-                SetOpmerkingenBoxPlaceholder();
-                LoadStatusListView();
+                if (success)
+                {
+                    MessageBox.Show("Statusupdate doorgevoerd.", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Voeg de nieuwe status toe aan de lijst
+                    _attractionStatuses.Add(new AttractionStatus { Name = attractie, Status = status, Opmerkingen = opmerkingen });
+
+                    // Reset velden naar hun neutrale positie
+                    await LoadAttractionsAsync();
+                    InitializeStatusComboBox();
+                    SetOpmerkingenBoxPlaceholder();
+                    LoadStatusListView();
+                }
+                else
+                {
+                    MessageBox.Show("Fout bij het doorvoeren van de statusupdate.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
+
+
         private void LoadStatusListView()
         {
-            StatusListView.ItemsSource = null;
-            StatusListView.ItemsSource = _attractionStatuses;
+            MaintenanceListView.ItemsSource = null;
+            MaintenanceListView.ItemsSource = _attractionStatuses;
+        }
+
+        private async Task LoadMaintenancesAsync()
+        {
+            try
+            {
+                var maintenances = await _apiService.GetAllMaintenancesAsync();
+                Dispatcher.Invoke(() =>
+                {
+                    MaintenanceListView.ItemsSource = maintenances;
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Error fetching maintenances: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void InformatiebordButton_Checked(object sender, RoutedEventArgs e)
