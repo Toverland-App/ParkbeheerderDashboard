@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -46,9 +47,23 @@ namespace ParkbeheerderDashboard
             var json = JsonConvert.SerializeObject(maintenanceData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync($"https://localhost:7129/api/AttractionMaintenance/AddMaintenance?attractionId={attractionId}", content);
+            try
+            {
+                var response = await _httpClient.PostAsync($"https://localhost:7129/api/AttractionMaintenance/AddMaintenance?attractionId={attractionId}", content);
 
-            return response.IsSuccessStatusCode;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error: {response.StatusCode}, Content: {errorContent}");
+                }
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                return false;
+            }
         }
 
         public async Task<bool> UpdateAttractionStatusAsync(int attractionId, string status)
@@ -61,9 +76,23 @@ namespace ParkbeheerderDashboard
             var json = JsonConvert.SerializeObject(statusData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PutAsync($"https://localhost:7129/api/AttractionMaintenance/UpdateStatus?attractionId={attractionId}", content);
+            try
+            {
+                var response = await _httpClient.PutAsync($"https://localhost:7129/api/AttractionMaintenance/UpdateStatus?attractionId={attractionId}", content);
 
-            return response.IsSuccessStatusCode;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error: {response.StatusCode}, Content: {errorContent}");
+                }
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                return false;
+            }
         }
 
         public async Task<List<Maintenance>> GetAllMaintenancesAsync()

@@ -170,11 +170,9 @@
                                     <ListView Name="MaintenanceListView" Margin="10">
                                         <ListView.View>
                                             <GridView>
-                                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50"/>
-                                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="150"/>
-                                                <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}" Width="100"/>
+                                                <GridViewColumn Header="Attractie" DisplayMemberBinding="{Binding Name}" Width="150"/>
                                                 <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
-                                                <GridViewColumn Header="Attraction ID" DisplayMemberBinding="{Binding AttractionId}" Width="100"/>
+                                                <GridViewColumn Header="Opmerkingen" DisplayMemberBinding="{Binding Opmerkingen}" Width="200"/>
                                             </GridView>
                                         </ListView.View>
                                     </ListView>
@@ -248,4 +246,3 @@
         </DockPanel>
     </Grid>
 </Window>
-

@@ -10,7 +10,6 @@ namespace ParkbeheerderDashboard
     public partial class MainWindow : Window
     {
         private readonly ApiService _apiService;
-        private List<AttractionStatus> _attractionStatuses = new List<AttractionStatus>();
 
         public MainWindow()
         {
@@ -25,7 +24,6 @@ namespace ParkbeheerderDashboard
             await LoadAttractionsAsync();
             InitializeStatusComboBox();
             await LoadMaintenancesAsync();
-            LoadStatusListView();
         }
 
         private async Task LoadAttractionsAsync()
@@ -50,7 +48,6 @@ namespace ParkbeheerderDashboard
             }
         }
 
-
         private void InitializeStatusComboBox()
         {
             StatusComboBox.Items.Clear();
@@ -65,12 +62,6 @@ namespace ParkbeheerderDashboard
             }
 
             StatusComboBox.SelectedIndex = 0;
-        }
-
-        private void InitializePlaceholders()
-        {
-            // Initialize placeholders for ComboBoxes
-            PlaceholderManager.InitializePlaceholders(AttractieComboBox, StatusComboBox, OpmerkingenBox);
         }
 
         private async void PostButton_Click(object sender, RoutedEventArgs e)
@@ -95,14 +86,11 @@ namespace ParkbeheerderDashboard
                 {
                     MessageBox.Show("Statusupdate doorgevoerd.", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Voeg de nieuwe status toe aan de lijst
-                    _attractionStatuses.Add(new AttractionStatus { Name = attractie, Status = status, Opmerkingen = opmerkingen });
-
                     // Reset velden naar hun neutrale positie
                     await LoadAttractionsAsync();
                     InitializeStatusComboBox();
                     SetOpmerkingenBoxPlaceholder();
-                    LoadStatusListView();
+                    await LoadMaintenancesAsync();
                 }
                 else
                 {
@@ -111,13 +99,6 @@ namespace ParkbeheerderDashboard
             }
         }
 
-
-
-        private void LoadStatusListView()
-        {
-            MaintenanceListView.ItemsSource = null;
-            MaintenanceListView.ItemsSource = _attractionStatuses;
-        }
 
         private async Task LoadMaintenancesAsync()
         {
@@ -135,6 +116,29 @@ namespace ParkbeheerderDashboard
             }
         }
 
+        private void SetOpmerkingenBoxPlaceholder()
+        {
+            OpmerkingenBox.Text = "Voer opmerkingen in...";
+            OpmerkingenBox.Foreground = System.Windows.Media.Brushes.Gray;
+        }
+
+        private void OpmerkingenBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (OpmerkingenBox.Text == "Voer opmerkingen in...")
+            {
+                OpmerkingenBox.Text = "";
+                OpmerkingenBox.Foreground = System.Windows.Media.Brushes.Black;
+            }
+        }
+
+        private void OpmerkingenBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(OpmerkingenBox.Text))
+            {
+                SetOpmerkingenBoxPlaceholder();
+            }
+        }
+
         private void InformatiebordButton_Checked(object sender, RoutedEventArgs e)
         {
             ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
@@ -145,7 +149,6 @@ namespace ParkbeheerderDashboard
         {
             ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
             ContentManager.ShowContent(AttractiesContent);
-            InitializePlaceholders();
         }
 
         private void PersoneelButton_Checked(object sender, RoutedEventArgs e)
@@ -176,29 +179,6 @@ namespace ParkbeheerderDashboard
         {
             ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
             ContentManager.ShowContent(FeedbackContent);
-        }
-
-        private void OpmerkingenBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (OpmerkingenBox.Text == "Voer opmerkingen in...")
-            {
-                OpmerkingenBox.Text = "";
-                OpmerkingenBox.Foreground = System.Windows.Media.Brushes.Black;
-            }
-        }
-
-        private void OpmerkingenBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(OpmerkingenBox.Text))
-            {
-                SetOpmerkingenBoxPlaceholder();
-            }
-        }
-
-        private void SetOpmerkingenBoxPlaceholder()
-        {
-            OpmerkingenBox.Text = "Voer opmerkingen in...";
-            OpmerkingenBox.Foreground = System.Windows.Media.Brushes.Gray;
         }
     }
 
