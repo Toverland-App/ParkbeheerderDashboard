@@ -31,11 +31,17 @@ namespace ParkbeheerderDashboard
         {
             try
             {
-                var areaId = string.IsNullOrWhiteSpace(AttractieAreaIdBox.Text) ? null : AttractieAreaIdBox.Text;
                 var attraction = new Attraction
                 {
                     Name = AttractieNaamBox.Text,
-                    AreaId = areaId
+                    MinHeight = double.Parse(MinHeightBox.Text),
+                    AreaId = int.Parse(AreaIdBox.Text),
+                    Description = DescriptionBox.Text,
+                    OpeningTime = OpeningTimeBox.Text,
+                    ClosingTime = ClosingTimeBox.Text,
+                    Capacity = int.Parse(CapacityBox.Text),
+                    QueueSpeed = int.Parse(QueueSpeedBox.Text),
+                    QueueLength = int.Parse(QueueLengthBox.Text)
                 };
 
                 var success = await _apiService.CreateAttractionAsync(attraction);
@@ -43,7 +49,7 @@ namespace ParkbeheerderDashboard
                 if (success)
                 {
                     MessageBox.Show("Attractie succesvol toegevoegd!");
-                    LoadAttractionsAsync(); // Refresh the list after addition
+                    await LoadAttractionsAsync(); // Refresh the list after addition
                 }
                 else
                 {
@@ -55,6 +61,7 @@ namespace ParkbeheerderDashboard
                 MessageBox.Show($"Er is een fout opgetreden: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private async void DeleteAttraction_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -82,9 +89,8 @@ namespace ParkbeheerderDashboard
         }
 
 
-        private void EditAttraction_Click(object sender, RoutedEventArgs e)
+        private async void EditAttraction_Click(object sender, RoutedEventArgs e)
         {
-
             Button button = sender as Button;
             if (button != null)
             {
@@ -92,9 +98,15 @@ namespace ParkbeheerderDashboard
                 if (attraction != null)
                 {
                     _currentAttraction = attraction;
-                    EntityNameTextBox.Text = _currentAttraction.Name;
-                    EntityAreaIdTextBox.Text = _currentAttraction.AreaId;
-                    AttractiesContent.Visibility = Visibility.Collapsed;
+                    NameTextBox.Text = _currentAttraction.Name;
+                    MinHeightTextBox.Text = _currentAttraction.MinHeight.ToString();
+                    AreaIdTextBox.Text = _currentAttraction.AreaId.ToString();
+                    DescriptionTextBox.Text = _currentAttraction.Description;
+                    OpeningTimeTextBox.Text = _currentAttraction.OpeningTime;
+                    ClosingTimeTextBox.Text = _currentAttraction.ClosingTime;
+                    CapacityTextBox.Text = _currentAttraction.Capacity.ToString();
+                    QueueSpeedTextBox.Text = _currentAttraction.QueueSpeed.ToString();
+                    QueueLengthTextBox.Text = _currentAttraction.QueueLength.ToString();
                     EditSection.Visibility = Visibility.Visible;
                 }
             }
@@ -104,20 +116,26 @@ namespace ParkbeheerderDashboard
         {
             if (_currentAttraction != null)
             {
-                _currentAttraction.Name = EntityNameTextBox.Text;
-                _currentAttraction.AreaId = EntityAreaIdTextBox.Text;
+                _currentAttraction.Name = NameTextBox.Text;
+                _currentAttraction.MinHeight = double.Parse(MinHeightTextBox.Text);
+                _currentAttraction.AreaId = int.Parse(AreaIdTextBox.Text);
+                _currentAttraction.Description = DescriptionTextBox.Text;
+                _currentAttraction.OpeningTime = OpeningTimeTextBox.Text;
+                _currentAttraction.ClosingTime = ClosingTimeTextBox.Text;
+                _currentAttraction.Capacity = int.Parse(CapacityTextBox.Text);
+                _currentAttraction.QueueSpeed = int.Parse(QueueSpeedTextBox.Text);
+                _currentAttraction.QueueLength = int.Parse(QueueLengthTextBox.Text);
 
                 var success = await _apiService.UpdateAttractionAsync(_currentAttraction.Id, _currentAttraction);
                 if (success)
                 {
-                    MessageBox.Show("Entity successfully updated!");
+                    MessageBox.Show("Attraction successfully updated!");
                     EditSection.Visibility = Visibility.Collapsed;
                     await LoadAttractionsAsync(); // Refresh the list after update
-                    AttractiesContent.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    MessageBox.Show("An error occurred while updating the entity. Check the log for more details.");
+                    MessageBox.Show("An error occurred while updating the attraction. Check the log for more details.");
                 }
             }
         }
