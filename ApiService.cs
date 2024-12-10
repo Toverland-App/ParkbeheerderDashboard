@@ -23,6 +23,36 @@ namespace ParkbeheerderDashboard
             return JsonConvert.DeserializeObject<List<Attraction>>(response);
         }
 
+        public async Task<Attraction> GetAttractionByIdAsync(int id)
+        {
+            var response = await _httpClient.GetStringAsync($"https://localhost:7129/api/Attraction/{id}");
+            return JsonConvert.DeserializeObject<Attraction>(response);
+        }
+
+        public async Task<bool> CreateAttractionAsync(Attraction attraction)
+        {
+            var json = JsonConvert.SerializeObject(attraction);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("https://localhost:7129/api/Attraction", content);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> UpdateAttractionAsync(int id, Attraction attraction)
+        {
+            var json = JsonConvert.SerializeObject(attraction);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync($"https://localhost:7129/api/Attraction/{id}", content);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> DeleteAttractionAsync(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"https://localhost:7129/api/Attraction/{id}");
+            return response.IsSuccessStatusCode;
+        } 
+
         public async Task<List<Maintenance>> GetMaintenanceAsync()
         {
             var response = await _httpClient.GetStringAsync("https://localhost:7129/api/Maintenance");
@@ -44,7 +74,6 @@ namespace ParkbeheerderDashboard
                 Status = status,
                 AttractionId = attractionId
             };
-
 
             var json = JsonConvert.SerializeObject(maintenanceData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
