@@ -102,6 +102,91 @@
                                     Margin="30,20,30,20"
                                     Grid.Row="1">
                             <!-- Nieuwe Status Tab -->
+                            <TabItem Header="Nieuwe attractie">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Naam van de attractie -->
+                                    <Label Content="Naam van de attractie" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Margin="30,10,0,0" 
+               Grid.Row="0" Grid.Column="0"/>
+                                    <TextBox Name="AttractieNaamBox"
+                 Width="200"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="30,30,0,0"
+                 Grid.Row="1" Grid.Column="0"/>
+
+                                    <!-- AreaId van de attractie -->
+                                    <Label Content="AreaId van de attractie" 
+               HorizontalAlignment="Right" 
+               VerticalAlignment="Top" 
+               Margin="0,10,30,0" 
+               Grid.Row="0" Grid.Column="1"/>
+                                    <TextBox Name="AttractieAreaIdBox"
+                 Width="200"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Top"
+                 Margin="0,30,30,0"
+                 Grid.Row="1" Grid.Column="1"/>
+
+                                    <!-- Toevoegen knop -->
+                                    <Button Content="Toevoegen"
+                Width="100"
+                Height="40"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,30"
+                Background="#4CAF50"
+                Foreground="White"
+                FontSize="16"
+                BorderBrush="Green"
+                Click="ToevoegenButton_Click"
+                Grid.Row="2" Grid.ColumnSpan="2"/>
+                                </Grid>
+                            </TabItem>
+
+                            <TabItem Header="Alle attracties">
+                                <Grid>
+                                    <ListView Name="AttractionsListView" Margin="10">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                                <GridViewColumn Header="AreaId" DisplayMemberBinding="{Binding AreaId}" Width="100"/>
+                                                <GridViewColumn Header="Acties" Width="100">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Button Content="🗑️" 
+                                            Width="30" 
+                                            Height="30" 
+                                            Margin="5,0" 
+                                            Click="DeleteAttraction_Click"/>
+                                                                <Button Content="✏️" 
+                                            Width="30" 
+                                            Height="30" 
+                                            Margin="5,0" 
+                                            Click="EditAttraction_Click"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </Grid>
+                            </TabItem>
+
                             <TabItem Header="Nieuwe status">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -182,6 +267,15 @@
                     </Grid>
 
                     <!-- Placeholder content for other sections -->
+                    <StackPanel x:Name="EditSection" Visibility="Collapsed" Margin="10">
+                        <TextBlock Text="Edit Entity" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                        <TextBlock Text="Entity Name:" />
+                        <TextBox x:Name="EntityNameTextBox" />
+                        <TextBlock Text="Entity Area ID:" />
+                        <TextBox x:Name="EntityAreaIdTextBox" />
+                        <Button Content="Save" Click="SaveButton_Click" />
+                        <Button Content="Cancel" Click="CancelButton_Click" />
+                    </StackPanel>
                     <StackPanel Name="PersoneelContent" Visibility="Collapsed">
                         <TextBlock Text="Personeel"
                                    FontSize="24"

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Newtonsoft.Json;
 using ParkbeheerderDashboard.Models;
 
@@ -34,9 +35,28 @@ namespace ParkbeheerderDashboard
             var json = JsonConvert.SerializeObject(attraction);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("https://localhost:7129/api/Attraction", content);
-            return response.IsSuccessStatusCode;
+            try
+            {
+                var response = await _httpClient.PostAsync("https://localhost:7129/api/Attraction", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error: {response.StatusCode}, Content: {errorContent}");
+                    MessageBox.Show($"Error: {response.StatusCode}, Content: {errorContent}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                MessageBox.Show($"Exception: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
         }
+
+
 
         public async Task<bool> UpdateAttractionAsync(int id, Attraction attraction)
         {

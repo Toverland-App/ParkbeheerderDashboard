@@ -1,4 +1,5 @@
 ﻿using ParkbeheerderDashboard.Models;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace ParkbeheerderDashboard
     public partial class MainWindow : Window
     {
         private readonly ApiService _apiService;
-
+        private Attraction _currentAttraction;
         public MainWindow()
         {
             InitializeComponent();
@@ -26,6 +27,107 @@ namespace ParkbeheerderDashboard
             await LoadMaintenancesAsync();
         }
 
+        private async void ToevoegenButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var areaId = string.IsNullOrWhiteSpace(AttractieAreaIdBox.Text) ? null : AttractieAreaIdBox.Text;
+                var attraction = new Attraction
+                {
+                    Name = AttractieNaamBox.Text,
+                    AreaId = areaId
+                };
+
+                var success = await _apiService.CreateAttractionAsync(attraction);
+
+                if (success)
+                {
+                    MessageBox.Show("Attractie succesvol toegevoegd!");
+                    LoadAttractionsAsync(); // Refresh the list after addition
+                }
+                else
+                {
+                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van de attractie. Controleer de log voor meer details.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Er is een fout opgetreden: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void DeleteAttraction_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                var attraction = button.DataContext as Attraction;
+                if (attraction != null)
+                {
+                    var result = MessageBox.Show($"Weet u zeker dat u de attractie '{attraction.Name}' wilt verwijderen?", "Bevestiging", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        var success = await _apiService.DeleteAttractionAsync(attraction.Id);
+                        if (success)
+                        {
+                            MessageBox.Show($"Attractie '{attraction.Name}' succesvol verwijderd!");
+                            await LoadAttractionsAsync(); // Refresh the list after deletion
+                        }
+                        else
+                        {
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de attractie. Controleer de log voor meer details.");
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void EditAttraction_Click(object sender, RoutedEventArgs e)
+        {
+
+            Button button = sender as Button;
+            if (button != null)
+            {
+                var attraction = button.DataContext as Attraction;
+                if (attraction != null)
+                {
+                    _currentAttraction = attraction;
+                    EntityNameTextBox.Text = _currentAttraction.Name;
+                    EntityAreaIdTextBox.Text = _currentAttraction.AreaId;
+                    AttractiesContent.Visibility = Visibility.Collapsed;
+                    EditSection.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentAttraction != null)
+            {
+                _currentAttraction.Name = EntityNameTextBox.Text;
+                _currentAttraction.AreaId = EntityAreaIdTextBox.Text;
+
+                var success = await _apiService.UpdateAttractionAsync(_currentAttraction.Id, _currentAttraction);
+                if (success)
+                {
+                    MessageBox.Show("Entity successfully updated!");
+                    EditSection.Visibility = Visibility.Collapsed;
+                    await LoadAttractionsAsync(); // Refresh the list after update
+                    AttractiesContent.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    MessageBox.Show("An error occurred while updating the entity. Check the log for more details.");
+                }
+            }
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditSection.Visibility = Visibility.Collapsed;
+        }
+
+
         private async Task LoadAttractionsAsync()
         {
             try
@@ -33,6 +135,7 @@ namespace ParkbeheerderDashboard
                 var attractions = await _apiService.GetAttractionsAsync();
                 Dispatcher.Invoke(() =>
                 {
+                    AttractionsListView.ItemsSource = attractions;
                     AttractieComboBox.Items.Clear();
                     AttractieComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer attractie" });
                     foreach (var attraction in attractions)
@@ -98,7 +201,6 @@ namespace ParkbeheerderDashboard
                 }
             }
         }
-
 
         private async Task LoadMaintenancesAsync()
         {
