@@ -2,9 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Newtonsoft.Json;
 
 namespace ParkbeheerderDashboard
 {
@@ -167,9 +170,34 @@ namespace ParkbeheerderDashboard
             }
         }
 
-        private void ToevoegenGebiedButton_Click(object sender, RoutedEventArgs e)
+        private async void ToevoegenGebiedButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Nieuw gebied toegevoegd.");
+            var gebied = new
+            {
+                id = 0,
+                name = GebiedNaamBox.Text,
+                size = 0 // Assuming size is not provided in the UI, set it to 0 or any default value
+            };
+
+            var json = JsonConvert.SerializeObject(gebied);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:7129/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = await client.PostAsync("api/Area", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Gebied succesvol toegevoegd!");
+                }
+                else
+                {
+                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van het gebied.");
+                }
+            }
         }
 
         private void DeleteGebied_Click(object sender, RoutedEventArgs e)
