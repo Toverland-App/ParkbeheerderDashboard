@@ -5,12 +5,10 @@
         Height="600"
         Width="800">
     <Grid>
-        <!-- Achtergrondkleur -->
         <Grid.Background>
             <SolidColorBrush Color="#f7f7f7" />
         </Grid.Background>
 
-        <!-- Links menu -->
         <DockPanel LastChildFill="True">
             <StackPanel Orientation="Vertical" Width="200" Background="White" DockPanel.Dock="Left">
                 <RadioButton Name="InformatiebordButton"
@@ -67,10 +65,8 @@
                 </StackPanel>
             </StackPanel>
 
-            <!-- Content grid -->
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <Grid Name="ContentGrid" Margin="10">
-                    <!-- Informatiebord Content -->
                     <StackPanel Name="InformatiebordContent" Visibility="Collapsed">
                         <TextBlock Text="Informatiebord"
                                    FontSize="24"
@@ -83,7 +79,6 @@
                                    Margin="30,70,30,0" />
                     </StackPanel>
 
-                    <!-- Attracties Content -->
                     <Grid Name="AttractiesContent" Visibility="Collapsed" Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -96,12 +91,10 @@
                                    VerticalAlignment="Top"
                                    Margin="30,20,0,0" Grid.Row="0"/>
 
-                        <!-- Tabs -->
                         <TabControl HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Margin="30,20,30,20"
                                     Grid.Row="1">
-                            <!-- Nieuwe Status Tab -->
                             <TabItem Header="Nieuwe attractie">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -120,7 +113,6 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!-- Naam van de attractie -->
                                     <Label Content="Naam van de attractie" 
                HorizontalAlignment="Left" 
                VerticalAlignment="Top" 
@@ -133,7 +125,6 @@
                  Margin="30,30,0,0"
                  Grid.Row="1" Grid.Column="0"/>
 
-                                    <!-- Min Height van de attractie -->
                                     <Label Content="Min Height van de attractie" 
                HorizontalAlignment="Left" 
                VerticalAlignment="Top" 
@@ -146,7 +137,6 @@
                  Margin="30,30,0,0"
                  Grid.Row="3" Grid.Column="0"/>
 
-                                    <!-- AreaId van de attractie -->
                                     <Label Content="AreaId van de attractie" 
                HorizontalAlignment="Right" 
                VerticalAlignment="Top" 
@@ -159,7 +149,6 @@
                  Margin="0,30,30,0"
                  Grid.Row="1" Grid.Column="1"/>
 
-                                    <!-- Description van de attractie -->
                                     <Label Content="Description van de attractie" 
                HorizontalAlignment="Right" 
                VerticalAlignment="Top" 
@@ -172,7 +161,6 @@
                  Margin="0,30,30,0"
                  Grid.Row="3" Grid.Column="1"/>
 
-                                    <!-- Opening Time van de attractie -->
                                     <Label Content="Opening Time van de attractie" 
                HorizontalAlignment="Left" 
                VerticalAlignment="Top" 
@@ -185,7 +173,6 @@
                  Margin="30,30,0,0"
                  Grid.Row="5" Grid.Column="0"/>
 
-                                    <!-- Closing Time van de attractie -->
                                     <Label Content="Closing Time van de attractie" 
                HorizontalAlignment="Right" 
                VerticalAlignment="Top" 
@@ -198,7 +185,6 @@
                  Margin="0,30,30,0"
                  Grid.Row="5" Grid.Column="1"/>
 
-                                    <!-- Capacity van de attractie -->
                                     <Label Content="Capacity van de attractie" 
                HorizontalAlignment="Left" 
                VerticalAlignment="Top" 
@@ -211,7 +197,6 @@
                  Margin="30,30,0,0"
                  Grid.Row="7" Grid.Column="0"/>
 
-                                    <!-- Queue Speed van de attractie -->
                                     <Label Content="Queue Speed van de attractie" 
                HorizontalAlignment="Right" 
                VerticalAlignment="Top" 
@@ -224,7 +209,6 @@
                  Margin="0,30,30,0"
                  Grid.Row="7" Grid.Column="1"/>
 
-                                    <!-- Queue Length van de attractie -->
                                     <Label Content="Queue Length van de attractie" 
                HorizontalAlignment="Left" 
                VerticalAlignment="Top" 
@@ -237,7 +221,6 @@
                  Margin="30,30,0,0"
                  Grid.Row="9" Grid.Column="0"/>
 
-                                    <!-- Toevoegen knop -->
                                     <Button Content="Toevoegen"
                 Width="100"
                 Height="40"
@@ -297,7 +280,6 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!-- Dropdown voor Attractie -->
                                     <ComboBox Name="AttractieComboBox"
                                               Width="200"
                                               HorizontalAlignment="Left"
@@ -305,17 +287,14 @@
                                               Margin="30,30,0,0"
                                               Grid.Row="0" Grid.Column="0"/>
 
-                                    <!-- Dropdown voor Status -->
                                     <ComboBox Name="StatusComboBox"
                                               Width="200"
                                               HorizontalAlignment="Right"
                                               VerticalAlignment="Top"
                                               Margin="0,30,30,0"
                                               Grid.Row="0" Grid.Column="1">
-                                        <!-- Options will be added in code-behind -->
                                     </ComboBox>
 
-                                    <!-- Opmerkingen -->
                                     <TextBox Name="OpmerkingenBox"
                                              Width="400"
                                              Height="100"
@@ -330,7 +309,6 @@
                                              Foreground="Gray"
                                              Grid.Row="1" Grid.ColumnSpan="2"/>
 
-                                    <!-- Post knop -->
                                     <Button Content="Post"
                                             Width="100"
                                             Height="40"
@@ -346,7 +324,6 @@
                                 </Grid>
                             </TabItem>
 
-                            <!-- Status Aanpassen Tab -->
                             <TabItem Header="Status aanpassen">
                                 <Grid>
                                     <ListView Name="MaintenanceListView" Margin="10">
@@ -363,7 +340,6 @@
                         </TabControl>
                     </Grid>
 
-                    <!-- Placeholder content for other sections -->
                     <StackPanel x:Name="EditSection" Visibility="Collapsed" Margin="10">
                         <TextBlock Text="Edit Attraction" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
                         <TextBlock Text="Name:" />
@@ -409,7 +385,6 @@
                         <TabControl HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Margin="30,20,30,20">
-                            <!-- Nieuw Gebied Tab -->
                             <TabItem Header="Nieuw gebied">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -420,7 +395,6 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!-- Naam van het gebied -->
                                     <Label Content="Naam van het gebied" 
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Top" 
@@ -433,7 +407,6 @@
                          Margin="30,30,0,0"
                          Grid.Row="1" Grid.Column="0"/>
 
-                                    <!-- Toevoegen knop -->
                                     <Button Content="Toevoegen"
                         Width="100"
                         Height="40"
@@ -449,7 +422,6 @@
                                 </Grid>
                             </TabItem>
 
-                            <!-- Alle Gebieden Tab -->
                             <TabItem Header="Alle gebieden">
                                 <Grid>
                                     <ListView Name="GebiedenListView" Margin="10">

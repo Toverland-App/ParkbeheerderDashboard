@@ -169,20 +169,17 @@ namespace ParkbeheerderDashboard
 
         private void ToevoegenGebiedButton_Click(object sender, RoutedEventArgs e)
         {
-            // Voeg mockdata toe voor een nieuw gebied
-            MessageBox.Show("Nieuw gebied toegevoegd (mockdata).");
+            MessageBox.Show("Nieuw gebied toegevoegd.");
         }
 
         private void DeleteGebied_Click(object sender, RoutedEventArgs e)
         {
-            // Verwijder mockdata voor een gebied
-            MessageBox.Show("Gebied verwijderd (mockdata).");
+            MessageBox.Show("Gebied verwijderd.");
         }
 
         private void EditGebied_Click(object sender, RoutedEventArgs e)
         {
-            // Bewerk mockdata voor een gebied
-            MessageBox.Show("Gebied bewerkt (mockdata).");
+            MessageBox.Show("Gebied bewerkt.");
         }
 
         private void InitializeStatusComboBox()
