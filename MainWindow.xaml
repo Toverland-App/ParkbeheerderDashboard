@@ -401,15 +401,88 @@
 
                     <StackPanel Name="GebiedenContent" Visibility="Collapsed">
                         <TextBlock Text="Gebieden"
-                                   FontSize="24"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   Margin="30,20,0,0" />
-                        <TextBlock Text="Hello World!"
-                                   TextWrapping="Wrap"
-                                   Margin="30,70,30,0" />
+               FontSize="24"
+               FontWeight="Bold"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="30,20,0,0" />
+                        <TabControl HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="30,20,30,20">
+                            <!-- Nieuw Gebied Tab -->
+                            <TabItem Header="Nieuw gebied">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Naam van het gebied -->
+                                    <Label Content="Naam van het gebied" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Margin="30,10,0,0" 
+                       Grid.Row="0" Grid.Column="0"/>
+                                    <TextBox Name="GebiedNaamBox"
+                         Width="200"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="30,30,0,0"
+                         Grid.Row="1" Grid.Column="0"/>
+
+                                    <!-- Toevoegen knop -->
+                                    <Button Content="Toevoegen"
+                        Width="100"
+                        Height="40"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,0,30"
+                        Background="#4CAF50"
+                        Foreground="White"
+                        FontSize="16"
+                        BorderBrush="Green"
+                        Click="ToevoegenGebiedButton_Click"
+                        Grid.Row="2" Grid.Column="0"/>
+                                </Grid>
+                            </TabItem>
+
+                            <!-- Alle Gebieden Tab -->
+                            <TabItem Header="Alle gebieden">
+                                <Grid>
+                                    <ListView Name="GebiedenListView" Margin="10">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                                <GridViewColumn Header="Acties" Width="100">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Button Content="🗑️" 
+                                                    Width="30" 
+                                                    Height="30" 
+                                                    Margin="5,0" 
+                                                    Click="DeleteGebied_Click"/>
+                                                                <Button Content="✏️" 
+                                                    Width="30" 
+                                                    Height="30" 
+                                                    Margin="5,0" 
+                                                    Click="EditGebied_Click"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
                     </StackPanel>
+
+
 
                     <StackPanel Name="BezoekersContent" Visibility="Collapsed">
                         <TextBlock Text="Bezoekers"

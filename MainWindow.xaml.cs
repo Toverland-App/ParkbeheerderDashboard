@@ -88,7 +88,6 @@ namespace ParkbeheerderDashboard
             }
         }
 
-
         private async void EditAttraction_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -145,7 +144,6 @@ namespace ParkbeheerderDashboard
             EditSection.Visibility = Visibility.Collapsed;
         }
 
-
         private async Task LoadAttractionsAsync()
         {
             try
@@ -167,6 +165,24 @@ namespace ParkbeheerderDashboard
             {
                 MessageBox.Show($"Error fetching attractions: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void ToevoegenGebiedButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Voeg mockdata toe voor een nieuw gebied
+            MessageBox.Show("Nieuw gebied toegevoegd (mockdata).");
+        }
+
+        private void DeleteGebied_Click(object sender, RoutedEventArgs e)
+        {
+            // Verwijder mockdata voor een gebied
+            MessageBox.Show("Gebied verwijderd (mockdata).");
+        }
+
+        private void EditGebied_Click(object sender, RoutedEventArgs e)
+        {
+            // Bewerk mockdata voor een gebied
+            MessageBox.Show("Gebied bewerkt (mockdata).");
         }
 
         private void InitializeStatusComboBox()
