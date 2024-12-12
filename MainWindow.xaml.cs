@@ -16,8 +16,8 @@ namespace ParkbeheerderDashboard
         {
             InitializeComponent();
             _apiService = new ApiService();
-            AttractiesButton.IsChecked = true; // Default to Attracties
-            Loaded += MainWindow_Loaded; // Correctly call the async method after the window is loaded
+            AttractiesButton.IsChecked = true;
+            Loaded += MainWindow_Loaded;
         }
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -49,7 +49,7 @@ namespace ParkbeheerderDashboard
                 if (success)
                 {
                     MessageBox.Show("Attractie succesvol toegevoegd!");
-                    await LoadAttractionsAsync(); // Refresh the list after addition
+                    await LoadAttractionsAsync();
                 }
                 else
                 {
@@ -77,7 +77,7 @@ namespace ParkbeheerderDashboard
                         if (success)
                         {
                             MessageBox.Show($"Attractie '{attraction.Name}' succesvol verwijderd!");
-                            await LoadAttractionsAsync(); // Refresh the list after deletion
+                            await LoadAttractionsAsync();
                         }
                         else
                         {
@@ -131,7 +131,7 @@ namespace ParkbeheerderDashboard
                 {
                     MessageBox.Show("Attraction successfully updated!");
                     EditSection.Visibility = Visibility.Collapsed;
-                    await LoadAttractionsAsync(); // Refresh the list after update
+                    await LoadAttractionsAsync();
                 }
                 else
                 {
@@ -174,7 +174,6 @@ namespace ParkbeheerderDashboard
             StatusComboBox.Items.Clear();
             StatusComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer status" });
 
-            // Add predefined statuses
             var predefinedStatuses = new List<string> { "Onderhoud", "Storing", "Weersomstandigheden" };
 
             foreach (var status in predefinedStatuses)
@@ -207,7 +206,6 @@ namespace ParkbeheerderDashboard
                 {
                     MessageBox.Show("Statusupdate doorgevoerd.", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Reset velden naar hun neutrale positie
                     await LoadAttractionsAsync();
                     InitializeStatusComboBox();
                     SetOpmerkingenBoxPlaceholder();
@@ -300,12 +298,5 @@ namespace ParkbeheerderDashboard
             ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
             ContentManager.ShowContent(FeedbackContent);
         }
-    }
-
-    public class AttractionStatus
-    {
-        public string Name { get; set; }
-        public string Status { get; set; }
-        public string Opmerkingen { get; set; }
     }
 }

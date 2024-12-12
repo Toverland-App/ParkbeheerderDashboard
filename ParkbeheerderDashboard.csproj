@@ -90,6 +90,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AttractionStatus.cs" />
     <Compile Include="Models\Attraction.cs" />
     <Compile Include="ContentManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
