@@ -28,6 +28,7 @@ namespace ParkbeheerderDashboard
             await LoadAttractionsAsync();
             InitializeStatusComboBox();
             await LoadMaintenancesAsync();
+            await LoadAreasAsync();
         }
 
         private async void ToevoegenButton_Click(object sender, RoutedEventArgs e)
@@ -176,7 +177,7 @@ namespace ParkbeheerderDashboard
             {
                 id = 0,
                 name = GebiedNaamBox.Text,
-                size = 0 // Assuming size is not provided in the UI, set it to 0 or any default value
+                size = 0
             };
 
             var json = JsonConvert.SerializeObject(gebied);
@@ -192,11 +193,40 @@ namespace ParkbeheerderDashboard
                 if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Gebied succesvol toegevoegd!");
+                    await LoadAreasAsync();
                 }
                 else
                 {
                     MessageBox.Show("Er is een fout opgetreden bij het toevoegen van het gebied.");
                 }
+            }
+        }
+
+        private async Task LoadAreasAsync()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("https://localhost:7129/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var response = await client.GetAsync("api/Area");
+                    response.EnsureSuccessStatusCode();
+
+                    var json = await response.Content.ReadAsStringAsync();
+                    var areas = JsonConvert.DeserializeObject<List<Area>>(json);
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        GebiedenListView.ItemsSource = areas;
+                    });
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Error fetching areas: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

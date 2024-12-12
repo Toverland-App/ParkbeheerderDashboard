@@ -409,18 +409,17 @@
                          Grid.Row="1" Grid.Column="0"/>
 
                                     <Button Content="Toevoegen"
-        Width="100"
-        Height="40"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Bottom"
-        Margin="10,10,10,30"
-        Background="#4CAF50"
-        Foreground="White"
-        FontSize="16"
-        BorderBrush="Green"
-        Click="ToevoegenGebiedButton_Click"
-        Grid.Row="2" Grid.Column="0"/>
-
+                        Width="100"
+                        Height="40"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="10,10,10,30"
+                        Background="#4CAF50"
+                        Foreground="White"
+                        FontSize="16"
+                        BorderBrush="Green"
+                        Click="ToevoegenGebiedButton_Click"
+                        Grid.Row="2" Grid.Column="0"/>
                                 </Grid>
                             </TabItem>
 
@@ -455,6 +454,7 @@
                             </TabItem>
                         </TabControl>
                     </StackPanel>
+
 
                     <StackPanel Name="BezoekersContent" Visibility="Collapsed">
                         <TextBlock Text="Bezoekers"

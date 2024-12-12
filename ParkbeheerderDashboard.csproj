@@ -89,6 +89,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Area.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="AttractionStatus.cs" />
     <Compile Include="Models\Attraction.cs" />
