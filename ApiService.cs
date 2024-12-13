@@ -56,8 +56,6 @@ namespace ParkbeheerderDashboard
             }
         }
 
-
-
         public async Task<bool> UpdateAttractionAsync(int id, Attraction attraction)
         {
             var json = JsonConvert.SerializeObject(attraction);
@@ -71,7 +69,7 @@ namespace ParkbeheerderDashboard
         {
             var response = await _httpClient.DeleteAsync($"https://localhost:7129/api/Attraction/{id}");
             return response.IsSuccessStatusCode;
-        } 
+        }
 
         public async Task<List<Maintenance>> GetMaintenanceAsync()
         {
@@ -150,6 +148,12 @@ namespace ParkbeheerderDashboard
         {
             var response = await _httpClient.GetStringAsync("https://localhost:7129/api/AttractionMaintenance/GetAllMaintenances");
             return JsonConvert.DeserializeObject<List<Maintenance>>(response);
+        }
+
+        public async Task<bool> DeleteAreaAsync(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"https://localhost:7129/api/Area/{id}");
+            return response.IsSuccessStatusCode;
         }
     }
 }

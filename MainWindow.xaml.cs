@@ -230,10 +230,33 @@ namespace ParkbeheerderDashboard
             }
         }
 
-        private void DeleteGebied_Click(object sender, RoutedEventArgs e)
+        private async void DeleteGebied_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Gebied verwijderd.");
+            Button button = sender as Button;
+            if (button != null)
+            {
+                var area = button.DataContext as Area;
+                if (area != null)
+                {
+                    var result = MessageBox.Show($"Weet u zeker dat u het gebied '{area.Name}' wilt verwijderen?", "Bevestiging", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        var success = await _apiService.DeleteAreaAsync(area.Id);
+                        if (success)
+                        {
+                            MessageBox.Show($"Gebied '{area.Name}' succesvol verwijderd!");
+                            await LoadAreasAsync();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van het gebied. Controleer de log voor meer details.");
+                        }
+                    }
+                }
+            }
         }
+
+
 
         private void EditGebied_Click(object sender, RoutedEventArgs e)
         {
