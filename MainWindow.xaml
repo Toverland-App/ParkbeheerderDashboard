@@ -60,9 +60,12 @@
                              FontWeight="Bold"
                              GroupName="Menu"
                              Checked="FeedbackButton_Checked" />
-                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="20,10,0,10">
-                    <Image Source="C:\Users\sjors\OneDrive - Office 365 Fontys\Bureaublad\Verdieping\Software\ParkbeheerderDashboard\Toverland_logo.png" Width="180" Height="100"/>
-                </StackPanel>
+                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Height="294">
+                    <Image Source="C:\Users\sjors\OneDrive\Desktop\Verdieping\parkbeheerderdashboard\Toverland_logo.png"
+                           Stretch="UniformToFill" 
+                           DockPanel.Dock="Bottom"
+                           Panel.ZIndex="1" RenderTransformOrigin="0.532,-1.059" Height="212"/>
+                </DockPanel>
             </StackPanel>
 
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -479,6 +482,7 @@
                                    TextWrapping="Wrap"
                                    Margin="30,70,30,0" />
                     </StackPanel>
+
 
                     <StackPanel Name="FeedbackContent" Visibility="Collapsed">
                         <TextBlock Text="Feedback"
