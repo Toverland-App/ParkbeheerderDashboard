@@ -256,8 +256,6 @@ namespace ParkbeheerderDashboard
             }
         }
 
-
-
         private void EditGebied_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Gebied bewerkt.");

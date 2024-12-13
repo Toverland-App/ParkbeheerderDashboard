@@ -330,7 +330,7 @@
                                         <ListView.View>
                                             <GridView>
                                                 <GridViewColumn Header="AttractieId" DisplayMemberBinding="{Binding AttractionId}" Width="150"/>
-                                                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                                                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="135"/>
                                                 <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
                                             </GridView>
                                         </ListView.View>
