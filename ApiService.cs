@@ -20,13 +20,13 @@ namespace ParkbeheerderDashboard
 
         public async Task<List<Attraction>> GetAttractionsAsync()
         {
-            var response = await _httpClient.GetStringAsync("https://localhost:7129/api/Attraction");
+            var response = await _httpClient.GetStringAsync("https://i558324.luna.fhict.nl/api/Attraction");
             return JsonConvert.DeserializeObject<List<Attraction>>(response);
         }
 
         public async Task<Attraction> GetAttractionByIdAsync(int id)
         {
-            var response = await _httpClient.GetStringAsync($"https://localhost:7129/api/Attraction/{id}");
+            var response = await _httpClient.GetStringAsync($"https://i558324.luna.fhict.nl/api/Attraction/{id}");
             return JsonConvert.DeserializeObject<Attraction>(response);
         }
 
@@ -37,7 +37,7 @@ namespace ParkbeheerderDashboard
 
             try
             {
-                var response = await _httpClient.PostAsync("https://localhost:7129/api/Attraction", content);
+                var response = await _httpClient.PostAsync("https://i558324.luna.fhict.nl/api/Attraction", content);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -61,25 +61,25 @@ namespace ParkbeheerderDashboard
             var json = JsonConvert.SerializeObject(attraction);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PutAsync($"https://localhost:7129/api/Attraction/{id}", content);
+            var response = await _httpClient.PutAsync($"https://i558324.luna.fhict.nl/api/Attraction/{id}", content);
             return response.IsSuccessStatusCode;
         }
 
         public async Task<bool> DeleteAttractionAsync(int id)
         {
-            var response = await _httpClient.DeleteAsync($"https://localhost:7129/api/Attraction/{id}");
+            var response = await _httpClient.DeleteAsync($"https://i558324.luna.fhict.nl/api/Attraction/{id}");
             return response.IsSuccessStatusCode;
         }
 
         public async Task<List<Maintenance>> GetMaintenanceAsync()
         {
-            var response = await _httpClient.GetStringAsync("https://localhost:7129/api/Maintenance");
+            var response = await _httpClient.GetStringAsync("https://i558324.luna.fhict.nl/api/Maintenance");
             return JsonConvert.DeserializeObject<List<Maintenance>>(response);
         }
 
         public async Task<List<AttractionStatus>> GetAttractionStatusesAsync()
         {
-            var response = await _httpClient.GetStringAsync("https://localhost:7129/api/AttractionMaintenance/GetAllMaintenances");
+            var response = await _httpClient.GetStringAsync("https://i558324.luna.fhict.nl/api/AttractionMaintenance/GetAllMaintenances");
             return JsonConvert.DeserializeObject<List<AttractionStatus>>(response);
         }
 
@@ -98,7 +98,7 @@ namespace ParkbeheerderDashboard
 
             try
             {
-                var response = await _httpClient.PostAsync($"https://localhost:7129/api/AttractionMaintenance/AddMaintenance?attractionId={attractionId}", content);
+                var response = await _httpClient.PostAsync($"https://i558324.luna.fhict.nl/api/AttractionMaintenance/AddMaintenance?attractionId={attractionId}", content);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -127,7 +127,7 @@ namespace ParkbeheerderDashboard
 
             try
             {
-                var response = await _httpClient.PutAsync($"https://localhost:7129/api/AttractionMaintenance/UpdateStatus?attractionId={attractionId}", content);
+                var response = await _httpClient.PutAsync($"https://i558324.luna.fhict.nl/api/AttractionMaintenance/UpdateStatus?attractionId={attractionId}", content);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -146,13 +146,13 @@ namespace ParkbeheerderDashboard
 
         public async Task<List<Maintenance>> GetAllMaintenancesAsync()
         {
-            var response = await _httpClient.GetStringAsync("https://localhost:7129/api/AttractionMaintenance/GetAllMaintenances");
+            var response = await _httpClient.GetStringAsync("https://i558324.luna.fhict.nl/api/AttractionMaintenance/GetAllMaintenances");
             return JsonConvert.DeserializeObject<List<Maintenance>>(response);
         }
 
         public async Task<bool> DeleteAreaAsync(int id)
         {
-            var response = await _httpClient.DeleteAsync($"https://localhost:7129/api/Area/{id}");
+            var response = await _httpClient.DeleteAsync($"https://i558324.luna.fhict.nl/api/Area/{id}");
             return response.IsSuccessStatusCode;
         }
     }
