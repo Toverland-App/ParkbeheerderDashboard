@@ -104,5 +104,13 @@ namespace ParkbeheerderDashboard.Models
             var json = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<List<Area>>(json);
         }
+
+        public async Task<bool> UpdateAreaAsync(int id, Area area)
+        {
+            var json = JsonConvert.SerializeObject(area);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"api/Area/{id}", content);
+            return response.IsSuccessStatusCode;
+        }
     }
 }

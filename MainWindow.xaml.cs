@@ -15,6 +15,8 @@ namespace ParkbeheerderDashboard
     {
         private readonly ApiService _apiService;
         private Attraction _currentAttraction;
+        private Area _currentArea;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -237,8 +239,47 @@ namespace ParkbeheerderDashboard
 
         private void EditGebied_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Gebied bewerkt.");
+            Button button = sender as Button;
+            if (button != null)
+            {
+                var area = button.DataContext as Area;
+                if (area != null)
+                {
+                    _currentArea = area;
+                    GebiedNameTextBox.Text = _currentArea.Name;
+                    GebiedenContent.Visibility = Visibility.Collapsed;
+                    EditGebiedSection.Visibility = Visibility.Visible;
+                }
+            }
         }
+
+        private async void SaveGebiedButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentArea != null)
+            {
+                _currentArea.Name = GebiedNameTextBox.Text;
+
+                var success = await _apiService.UpdateAreaAsync(_currentArea.Id, _currentArea);
+                if (success)
+                {
+                    MessageBox.Show("Gebied succesvol bijgewerkt!");
+                    EditGebiedSection.Visibility = Visibility.Collapsed;
+                    GebiedenContent.Visibility = Visibility.Visible;
+                    await LoadAreasAsync();
+                }
+                else
+                {
+                    MessageBox.Show("Er is een fout opgetreden bij het bijwerken van het gebied. Controleer de log voor meer details.");
+                }
+            }
+        }
+
+        private void CancelGebiedButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditGebiedSection.Visibility = Visibility.Collapsed;
+            GebiedenContent.Visibility = Visibility.Visible;
+        }
+
 
         private void InitializeStatusComboBox()
         {

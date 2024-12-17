@@ -347,6 +347,13 @@
                         <Button Content="Save" Click="SaveButton_Click" />
                         <Button Content="Cancel" Click="CancelButton_Click" />
                     </StackPanel>
+                    <StackPanel x:Name="EditGebiedSection" Visibility="Collapsed" Margin="10">
+                        <TextBlock Text="Edit Gebied" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                        <TextBlock Text="Name:" />
+                        <TextBox x:Name="GebiedNameTextBox" />
+                        <Button Content="Save" Click="SaveGebiedButton_Click" />
+                        <Button Content="Cancel" Click="CancelGebiedButton_Click" />
+                    </StackPanel>
                     <StackPanel Name="PersoneelContent" Visibility="Collapsed">
                         <TextBlock Text="Personeel"
                                    FontSize="24"
