@@ -308,14 +308,14 @@
                                 </Grid>
                             </TabItem>
 
-                            <TabItem Header="Status aanpassen">
+                            <TabItem Header="Alle statussen">
                                 <Grid>
                                     <ListView Name="MaintenanceListView" Margin="10">
                                         <ListView.View>
                                             <GridView>
-                                                <GridViewColumn Header="AttractieId" DisplayMemberBinding="{Binding AttractionId}" Width="150"/>
+                                                <GridViewColumn Header="Attractie" DisplayMemberBinding="{Binding AttractionName}" Width="150"/>
                                                 <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="135"/>
-                                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
+                                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="175"/>
                                             </GridView>
                                         </ListView.View>
                                     </ListView>

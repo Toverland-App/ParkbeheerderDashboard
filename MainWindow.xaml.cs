@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace ParkbeheerderDashboard
 {
@@ -335,6 +336,17 @@ namespace ParkbeheerderDashboard
             try
             {
                 var maintenances = await _apiService.GetAllMaintenancesAsync();
+                var attractions = await _apiService.GetAttractionsAsync();
+
+                foreach (var maintenance in maintenances)
+                {
+                    var attraction = attractions.FirstOrDefault(a => a.Id == maintenance.AttractionId);
+                    if (attraction != null)
+                    {
+                        maintenance.AttractionName = attraction.Name;
+                    }
+                }
+
                 Dispatcher.Invoke(() =>
                 {
                     MaintenanceListView.ItemsSource = maintenances;
@@ -345,6 +357,7 @@ namespace ParkbeheerderDashboard
                 MessageBox.Show($"Error fetching maintenances: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void SetOpmerkingenBoxPlaceholder()
         {

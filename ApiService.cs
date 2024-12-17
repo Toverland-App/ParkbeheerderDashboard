@@ -83,6 +83,12 @@ namespace ParkbeheerderDashboard.Models
             return response.IsSuccessStatusCode;
         }
 
+        public async Task<bool> DeleteMaintenanceAsync(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"api/Maintenance/{id}");
+            return response.IsSuccessStatusCode;
+        }
+
         public async Task<bool> DeleteAreaAsync(int id)
         {
             var response = await _httpClient.DeleteAsync($"api/Area/{id}");
