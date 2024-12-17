@@ -180,25 +180,16 @@ namespace ParkbeheerderDashboard
                 size = 0
             };
 
-            var json = JsonConvert.SerializeObject(gebied);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var success = await _apiService.CreateAreaAsync(gebied);
 
-            using (var client = new HttpClient())
+            if (success)
             {
-                client.BaseAddress = new Uri("https://i558324.luna.fhict.nl");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var response = await client.PostAsync("api/Area", content);
-                if (response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Gebied succesvol toegevoegd!");
-                    await LoadAreasAsync();
-                }
-                else
-                {
-                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van het gebied.");
-                }
+                MessageBox.Show("Gebied succesvol toegevoegd!");
+                await LoadAreasAsync();
+            }
+            else
+            {
+                MessageBox.Show("Er is een fout opgetreden bij het toevoegen van het gebied.");
             }
         }
 
@@ -206,29 +197,18 @@ namespace ParkbeheerderDashboard
         {
             try
             {
-                using (var client = new HttpClient())
+                var areas = await _apiService.GetAreasAsync();
+                Dispatcher.Invoke(() =>
                 {
-                    client.BaseAddress = new Uri("https://i558324.luna.fhict.nl");
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    var response = await client.GetAsync("api/Area");
-                    response.EnsureSuccessStatusCode();
-
-                    var json = await response.Content.ReadAsStringAsync();
-                    var areas = JsonConvert.DeserializeObject<List<Area>>(json);
-
-                    Dispatcher.Invoke(() =>
-                    {
-                        GebiedenListView.ItemsSource = areas;
-                    });
-                }
+                    GebiedenListView.ItemsSource = areas;
+                });
             }
             catch (HttpRequestException ex)
             {
                 MessageBox.Show($"Error fetching areas: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private async void DeleteGebied_Click(object sender, RoutedEventArgs e)
         {
