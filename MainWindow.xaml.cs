@@ -185,7 +185,7 @@ namespace ParkbeheerderDashboard
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:7129/");
+                client.BaseAddress = new Uri("https://i558324.luna.fhict.nl");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -208,7 +208,7 @@ namespace ParkbeheerderDashboard
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("https://localhost:7129/");
+                    client.BaseAddress = new Uri("https://i558324.luna.fhict.nl");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
