@@ -11,13 +11,6 @@
 
         <DockPanel LastChildFill="True">
             <StackPanel Orientation="Vertical" Width="200" Background="White" DockPanel.Dock="Left">
-                <RadioButton Name="InformatiebordButton"
-                             Content="Informatiebord"
-                             FontSize="16"
-                             Margin="20,20,0,10"
-                             FontWeight="Bold"
-                             GroupName="Menu"
-                             Checked="InformatiebordButton_Checked" />
                 <RadioButton Name="AttractiesButton"
                              Content="Attracties"
                              FontSize="16"
@@ -70,17 +63,6 @@
 
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <Grid Name="ContentGrid" Margin="10">
-                    <StackPanel Name="InformatiebordContent" Visibility="Collapsed">
-                        <TextBlock Text="Informatiebord"
-                                   FontSize="24"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   Margin="30,20,0,0" />
-                        <TextBlock Text="Hello World!"
-                                   TextWrapping="Wrap"
-                                   Margin="30,70,30,0" />
-                    </StackPanel>
 
                     <Grid Name="AttractiesContent" Visibility="Collapsed" Margin="10">
                         <Grid.RowDefinitions>
@@ -250,15 +232,15 @@
                                                         <DataTemplate>
                                                             <StackPanel Orientation="Horizontal">
                                                                 <Button Content="🗑️" 
-                                            Width="30" 
-                                            Height="30" 
-                                            Margin="5,0" 
-                                            Click="DeleteAttraction_Click"/>
+                                                                    Width="30" 
+                                                                    Height="30" 
+                                                                    Margin="5,0" 
+                                                                    Click="DeleteAttraction_Click"/>
                                                                 <Button Content="✏️" 
-                                            Width="30" 
-                                            Height="30" 
-                                            Margin="5,0" 
-                                            Click="EditAttraction_Click"/>
+                                                                    Width="30" 
+                                                                    Height="30" 
+                                                                    Margin="5,0" 
+                                                                    Click="EditAttraction_Click"/>
                                                             </StackPanel>
                                                         </DataTemplate>
                                                     </GridViewColumn.CellTemplate>
@@ -379,14 +361,14 @@
 
                     <StackPanel Name="GebiedenContent" Visibility="Collapsed">
                         <TextBlock Text="Gebieden"
-               FontSize="24"
-               FontWeight="Bold"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Margin="30,20,0,0" />
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Margin="30,20,0,0" />
                         <TabControl HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Margin="30,20,30,20">
+                                    VerticalAlignment="Stretch"
+                                    Margin="30,20,30,20">
                             <TabItem Header="Nieuw gebied">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -399,29 +381,29 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Label Content="Naam van het gebied" 
-                       HorizontalAlignment="Left" 
-                       VerticalAlignment="Top" 
-                       Margin="30,10,0,0" 
-                       Grid.Row="0" Grid.Column="0"/>
+                                           HorizontalAlignment="Left" 
+                                           VerticalAlignment="Top" 
+                                           Margin="30,10,0,0" 
+                                           Grid.Row="0" Grid.Column="0"/>
                                     <TextBox Name="GebiedNaamBox"
-                         Width="200"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Top"
-                         Margin="30,10,0,0"
-                         Grid.Row="1" Grid.Column="0"/>
+                                             Width="200"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top"
+                                             Margin="30,10,0,0"
+                                             Grid.Row="1" Grid.Column="0"/>
 
                                     <Button Content="Toevoegen"
-                        Width="100"
-                        Height="40"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                        Margin="10,10,10,30"
-                        Background="#4CAF50"
-                        Foreground="White"
-                        FontSize="16"
-                        BorderBrush="Green"
-                        Click="ToevoegenGebiedButton_Click"
-                        Grid.Row="2" Grid.Column="0"/>
+                                            Width="100"
+                                            Height="40"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            Margin="10,10,10,30"
+                                            Background="#4CAF50"
+                                            Foreground="White"
+                                            FontSize="16"
+                                            BorderBrush="Green"
+                                            Click="ToevoegenGebiedButton_Click"
+                                            Grid.Row="2" Grid.Column="0"/>
                                 </Grid>
                             </TabItem>
 
@@ -436,15 +418,15 @@
                                                         <DataTemplate>
                                                             <StackPanel Orientation="Horizontal">
                                                                 <Button Content="🗑️" 
-                                                    Width="30" 
-                                                    Height="30" 
-                                                    Margin="5,0" 
-                                                    Click="DeleteGebied_Click"/>
+                                                                        Width="30" 
+                                                                        Height="30" 
+                                                                        Margin="5,0" 
+                                                                        Click="DeleteGebied_Click"/>
                                                                 <Button Content="✏️" 
-                                                    Width="30" 
-                                                    Height="30" 
-                                                    Margin="5,0" 
-                                                    Click="EditGebied_Click"/>
+                                                                        Width="30" 
+                                                                        Height="30" 
+                                                                        Margin="5,0" 
+                                                                        Click="EditGebied_Click"/>
                                                             </StackPanel>
                                                         </DataTemplate>
                                                     </GridViewColumn.CellTemplate>

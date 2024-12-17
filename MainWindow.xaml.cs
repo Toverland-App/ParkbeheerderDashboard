@@ -209,7 +209,6 @@ namespace ParkbeheerderDashboard
             }
         }
 
-
         private async void DeleteGebied_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -329,45 +328,39 @@ namespace ParkbeheerderDashboard
             }
         }
 
-        private void InformatiebordButton_Checked(object sender, RoutedEventArgs e)
-        {
-            ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
-            ContentManager.ShowContent(InformatiebordContent);
-        }
-
         private void AttractiesButton_Checked(object sender, RoutedEventArgs e)
         {
-            ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
+            ContentManager.HideAllContent(AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
             ContentManager.ShowContent(AttractiesContent);
         }
 
         private void PersoneelButton_Checked(object sender, RoutedEventArgs e)
         {
-            ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
+            ContentManager.HideAllContent(AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
             ContentManager.ShowContent(PersoneelContent);
         }
 
         private void GebiedenButton_Checked(object sender, RoutedEventArgs e)
         {
-            ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
+            ContentManager.HideAllContent(AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
             ContentManager.ShowContent(GebiedenContent);
         }
 
         private void BezoekersButton_Checked(object sender, RoutedEventArgs e)
         {
-            ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
+            ContentManager.HideAllContent(AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
             ContentManager.ShowContent(BezoekersContent);
         }
 
         private void OnderhoudButton_Checked(object sender, RoutedEventArgs e)
         {
-            ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
+            ContentManager.HideAllContent(AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
             ContentManager.ShowContent(OnderhoudContent);
         }
 
         private void FeedbackButton_Checked(object sender, RoutedEventArgs e)
         {
-            ContentManager.HideAllContent(InformatiebordContent, AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
+            ContentManager.HideAllContent(AttractiesContent, PersoneelContent, GebiedenContent, BezoekersContent, OnderhoudContent, FeedbackContent);
             ContentManager.ShowContent(FeedbackContent);
         }
     }
