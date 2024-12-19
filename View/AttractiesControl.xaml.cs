@@ -91,7 +91,7 @@ namespace ParkbeheerderDashboard.View
             }
         }
 
-        private async void EditAttraction_Click(object sender, RoutedEventArgs e)
+        private void EditAttraction_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             if (button != null)

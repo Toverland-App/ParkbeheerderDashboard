@@ -67,17 +67,21 @@ namespace ParkbeheerderDashboard
 
         private void InitializeStatusComboBox()
         {
-            StatusComboBox.Items.Clear();
-            StatusComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer status" });
-
-            var predefinedStatuses = new List<string> { "Onderhoud", "Storing", "Weersomstandigheden" };
-
-            foreach (var status in predefinedStatuses)
+            var statusComboBox = FindName("StatusComboBox") as ComboBox;
+            if (statusComboBox != null)
             {
-                StatusComboBox.Items.Add(new ComboBoxItem { Content = status });
-            }
+                statusComboBox.Items.Clear();
+                statusComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer status" });
 
-            StatusComboBox.SelectedIndex = 0;
+                var predefinedStatuses = new List<string> { "Onderhoud", "Storing", "Weersomstandigheden" };
+
+                foreach (var status in predefinedStatuses)
+                {
+                    statusComboBox.Items.Add(new ComboBoxItem { Content = status });
+                }
+
+                statusComboBox.SelectedIndex = 0;
+            }
         }
 
         private async Task LoadAttractionsAsync()
@@ -87,14 +91,24 @@ namespace ParkbeheerderDashboard
                 var attractions = await _apiService.GetAttractionsAsync();
                 Dispatcher.Invoke(() =>
                 {
-                    AttractionsListView.ItemsSource = attractions;
-                    AttractieComboBox.Items.Clear();
-                    AttractieComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer attractie" });
-                    foreach (var attraction in attractions)
+                    var attractionsListView = FindName("AttractionsListView") as ListView;
+                    var attractieComboBox = FindName("AttractieComboBox") as ComboBox;
+
+                    if (attractionsListView != null)
                     {
-                        AttractieComboBox.Items.Add(new ComboBoxItem { Content = attraction.Name, Tag = attraction });
+                        attractionsListView.ItemsSource = attractions;
                     }
-                    AttractieComboBox.SelectedIndex = 0;
+
+                    if (attractieComboBox != null)
+                    {
+                        attractieComboBox.Items.Clear();
+                        attractieComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer attractie" });
+                        foreach (var attraction in attractions)
+                        {
+                            attractieComboBox.Items.Add(new ComboBoxItem { Content = attraction.Name, Tag = attraction });
+                        }
+                        attractieComboBox.SelectedIndex = 0;
+                    }
                 });
             }
             catch (HttpRequestException ex)
@@ -121,7 +135,11 @@ namespace ParkbeheerderDashboard
 
                 Dispatcher.Invoke(() =>
                 {
-                    MaintenanceListView.ItemsSource = maintenances;
+                    var maintenanceListView = FindName("MaintenanceListView") as ListView;
+                    if (maintenanceListView != null)
+                    {
+                        maintenanceListView.ItemsSource = maintenances;
+                    }
                 });
             }
             catch (HttpRequestException ex)
@@ -137,7 +155,11 @@ namespace ParkbeheerderDashboard
                 var areas = await _apiService.GetAreasAsync();
                 Dispatcher.Invoke(() =>
                 {
-                    GebiedenListView.ItemsSource = areas;
+                    var gebiedenListView = FindName("GebiedenListView") as ListView;
+                    if (gebiedenListView != null)
+                    {
+                        gebiedenListView.ItemsSource = areas;
+                    }
                 });
             }
             catch (HttpRequestException ex)

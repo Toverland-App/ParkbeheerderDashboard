@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel Name="GebiedenContent" Visibility="Collapsed">
+        <StackPanel Name="GebiedenContent" Visibility="Visible">
             <TextBlock Text="Gebieden"
                FontSize="24"
                FontWeight="Bold"
@@ -85,6 +85,14 @@
                     </Grid>
                 </TabItem>
             </TabControl>
+        </StackPanel>
+
+        <StackPanel x:Name="EditGebiedSection" Visibility="Collapsed" Margin="10">
+            <TextBlock Text="Edit Gebied" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+            <TextBlock Text="Name:" />
+            <TextBox x:Name="GebiedNameTextBox" />
+            <Button Content="Save" Click="SaveGebiedButton_Click" />
+            <Button Content="Cancel" Click="CancelGebiedButton_Click" />
         </StackPanel>
     </Grid>
 </UserControl>
