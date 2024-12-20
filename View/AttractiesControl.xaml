@@ -256,9 +256,22 @@
                         <ListView Name="MaintenanceListView" Margin="10">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Attractie" DisplayMemberBinding="{Binding AttractionName}" Width="150"/>
+                                    <GridViewColumn Header="Attractie" DisplayMemberBinding="{Binding AttractionName}" Width="120"/>
                                     <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="135"/>
                                     <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="175"/>
+                                    <GridViewColumn Header="Acties" Width="50">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Content="🗑️" 
+                                                            Width="30" 
+                                                            Height="30" 
+                                                            Margin="0,0" 
+                                                            Click="DeleteMaintenance_Click"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>

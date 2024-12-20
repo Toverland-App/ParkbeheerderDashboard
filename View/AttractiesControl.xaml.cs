@@ -110,6 +110,7 @@ namespace ParkbeheerderDashboard.View
                     QueueSpeedTextBox.Text = _currentAttraction.QueueSpeed.ToString();
                     QueueLengthTextBox.Text = _currentAttraction.QueueLength.ToString();
                     EditSection.Visibility = Visibility.Visible;
+                    AttractiesContent.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -133,6 +134,7 @@ namespace ParkbeheerderDashboard.View
                 {
                     MessageBox.Show("Attraction successfully updated!");
                     EditSection.Visibility = Visibility.Collapsed;
+                    AttractiesContent.Visibility = Visibility.Visible;
                     await LoadAttractionsAsync();
                 }
                 else
@@ -145,6 +147,7 @@ namespace ParkbeheerderDashboard.View
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             EditSection.Visibility = Visibility.Collapsed;
+            AttractiesContent.Visibility = Visibility.Visible;
         }
 
         private async Task LoadAttractionsAsync()
@@ -267,6 +270,32 @@ namespace ParkbeheerderDashboard.View
             }
 
             StatusComboBox.SelectedIndex = 0;
+        }
+
+        private async void DeleteMaintenance_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                var maintenance = button.DataContext as Maintenance;
+                if (maintenance != null)
+                {
+                    var result = MessageBox.Show($"Weet u zeker dat u de status '{maintenance.Status}' voor attractie '{maintenance.AttractionName}' wilt verwijderen?", "Bevestiging", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        var success = await _apiService.DeleteMaintenanceAsync(maintenance.Id);
+                        if (success)
+                        {
+                            MessageBox.Show($"Status '{maintenance.Status}' voor attractie '{maintenance.AttractionName}' succesvol verwijderd!");
+                            await LoadMaintenancesAsync();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de status. Controleer de log voor meer details.");
+                        }
+                    }
+                }
+            }
         }
     }
 }
