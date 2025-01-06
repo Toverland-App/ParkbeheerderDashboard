@@ -49,7 +49,7 @@
                              GroupName="Menu"
                              Checked="FeedbackButton_Checked" />
                 <DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Height="294">
-                    <Image Source="C:\Users\sjors\OneDrive\Desktop\Verdieping\parkbeheerderdashboard\Toverland_logo.png"
+                    <Image Source="/Assets/Toverland_logo.png"
                            Stretch="UniformToFill" 
                            DockPanel.Dock="Bottom"
                            Panel.ZIndex="1" RenderTransformOrigin="0.532,-1.059" Height="212"/>
