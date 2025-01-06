@@ -1,10 +1,15 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace ParkbeheerderDashboard
 {
     public partial class App : Application
     {
-        // Remove the manually defined Main method
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
     }
 }

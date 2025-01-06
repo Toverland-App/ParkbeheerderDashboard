@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:view="clr-namespace:ParkbeheerderDashboard.View"
+        xmlns:local="clr-namespace:ParkbeheerderDashboard"
         Title="Attractie Status Beheer"
         Height="600"
         Width="800">
@@ -66,5 +67,7 @@
                 <ContentControl Name="ContentControl" Margin="10"/>
             </ScrollViewer>
         </DockPanel>
+        <local:LoginOverlay x:Name="LoginOverlay" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LoginSuccessful="LoginOverlay_LoginSuccessful"/>
     </Grid>
 </Window>
+

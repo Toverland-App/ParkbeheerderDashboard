@@ -92,6 +92,9 @@
     <Compile Include="View\GebiedenControl.xaml.cs">
       <DependentUpon>GebiedenControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LoginOverlay.xaml.cs">
+      <DependentUpon>LoginOverlay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OnderhoudControl.xaml.cs">
       <DependentUpon>OnderhoudControl.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GebiedenControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginOverlay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
