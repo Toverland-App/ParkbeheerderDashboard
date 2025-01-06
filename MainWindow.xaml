@@ -41,13 +41,6 @@
                              FontWeight="Bold"
                              GroupName="Menu"
                              Checked="BezoekersButton_Checked" />
-                <RadioButton Name="OnderhoudButton"
-                             Content="Onderhoud"
-                             FontSize="16"
-                             Margin="20,10,0,10"
-                             FontWeight="Bold"
-                             GroupName="Menu"
-                             Checked="OnderhoudButton_Checked" />
                 <RadioButton Name="FeedbackButton"
                              Content="Feedback"
                              FontSize="16"
