@@ -274,7 +274,7 @@ namespace ParkbeheerderDashboard.View
 
             if (attractie == "Selecteer attractie" || status == "Selecteer status" || opmerkingen == "Voer opmerkingen in...")
             {
-                MessageBox.Show("Vul alle velden in voordat u post.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Vul alle velden in voordat u toevoegd.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {

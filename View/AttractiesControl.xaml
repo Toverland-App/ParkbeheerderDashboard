@@ -236,7 +236,7 @@
                          Foreground="Gray"
                          Grid.Row="1" Grid.ColumnSpan="2"/>
 
-                        <Button Content="Post"
+                        <Button Content="Toevoegen"
                         Width="100"
                         Height="40"
                         HorizontalAlignment="Center"
