@@ -119,6 +119,32 @@ namespace ParkbeheerderDashboard.View
         {
             if (_currentAttraction != null)
             {
+                if (string.IsNullOrWhiteSpace(NameTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(MinHeightTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(AreaIdTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(DescriptionTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(OpeningTimeTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(ClosingTimeTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(CapacityTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(QueueSpeedTextBox.Text) ||
+                    string.IsNullOrWhiteSpace(QueueLengthTextBox.Text))
+                {
+                    MessageBox.Show("Vul alle velden in.", "Validatie Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                if (!double.TryParse(MinHeightTextBox.Text, out _) ||
+                    !int.TryParse(AreaIdTextBox.Text, out _) ||
+                    !TimeSpan.TryParse(OpeningTimeTextBox.Text, out _) ||
+                    !TimeSpan.TryParse(ClosingTimeTextBox.Text, out _) ||
+                    !int.TryParse(CapacityTextBox.Text, out _) ||
+                    !int.TryParse(QueueSpeedTextBox.Text, out _) ||
+                    !int.TryParse(QueueLengthTextBox.Text, out _))
+                {
+                    MessageBox.Show("Controleer of alle velden correct zijn ingevuld.", "Validatie Fout", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 _currentAttraction.Name = NameTextBox.Text;
                 _currentAttraction.MinHeight = double.Parse(MinHeightTextBox.Text);
                 _currentAttraction.AreaId = int.Parse(AreaIdTextBox.Text);
@@ -143,6 +169,7 @@ namespace ParkbeheerderDashboard.View
                 }
             }
         }
+
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
