@@ -44,6 +44,11 @@ namespace ParkbeheerderDashboard
         {
 
         }
+
+        private void LoginOverlay_Loaded_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

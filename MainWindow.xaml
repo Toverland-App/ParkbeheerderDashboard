@@ -34,13 +34,6 @@
                              FontWeight="Bold"
                              GroupName="Menu"
                              Checked="GebiedenButton_Checked" />
-                <RadioButton Name="BezoekersButton"
-                             Content="Bezoekers"
-                             FontSize="16"
-                             Margin="20,10,0,10"
-                             FontWeight="Bold"
-                             GroupName="Menu"
-                             Checked="BezoekersButton_Checked" />
                 <RadioButton Name="FeedbackButton"
                              Content="Feedback"
                              FontSize="16"
@@ -48,19 +41,17 @@
                              FontWeight="Bold"
                              GroupName="Menu"
                              Checked="FeedbackButton_Checked" />
-                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Height="294">
-                    <Image Source="/Assets/Toverland_logo.png"
-                           Stretch="UniformToFill" 
-                           DockPanel.Dock="Bottom"
+                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Height="200"/>
+                <Image Source="/Assets/Toverland_logo.png"
+                           Stretch="UniformToFill"
                            Panel.ZIndex="1" RenderTransformOrigin="0.532,-1.059" Height="212"/>
-                </DockPanel>
             </StackPanel>
 
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ContentControl Name="ContentControl" Margin="10"/>
             </ScrollViewer>
         </DockPanel>
-        <local:LoginOverlay x:Name="LoginOverlay" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LoginSuccessful="LoginOverlay_LoginSuccessful"/>
+        <local:LoginOverlay x:Name="LoginOverlay" Visibility="Visible" LoginSuccessful="LoginOverlay_LoginSuccessful" Loaded="LoginOverlay_Loaded_1"/>
     </Grid>
 </Window>
 
