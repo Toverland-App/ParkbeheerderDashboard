@@ -118,5 +118,45 @@ namespace ParkbeheerderDashboard.Models
             var response = await _httpClient.PutAsync($"api/Area/{id}", content);
             return response.IsSuccessStatusCode;
         }
+
+        // Employee CRUD operations
+        public async Task<List<Employee>> GetEmployeesAsync()
+        {
+            var response = await _httpClient.GetAsync("api/Employee");
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<Employee>>(json);
+        }
+
+        public async Task<Employee> GetEmployeeByIdAsync(int id)
+        {
+            var response = await _httpClient.GetAsync($"api/Employee/{id}");
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Employee>(json);
+        }
+
+        public async Task<bool> CreateEmployeeAsync(Employee employee)
+        {
+            var json = JsonConvert.SerializeObject(employee);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("api/Employee", content);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> UpdateEmployeeAsync(int id, Employee employee)
+        {
+            var json = JsonConvert.SerializeObject(employee);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"api/Employee/{id}", content);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> DeleteEmployeeAsync(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"api/Employee/{id}");
+            return response.IsSuccessStatusCode;
+        }
     }
 }
+

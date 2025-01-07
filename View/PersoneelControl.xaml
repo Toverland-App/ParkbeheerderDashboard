@@ -6,10 +6,187 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Hello World!" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   FontSize="24" 
-                   FontWeight="Bold"/>
+        <StackPanel Name="PersoneelContent" Visibility="Visible">
+            <TextBlock Text="Personeel"
+               FontSize="24"
+               FontWeight="Bold"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="30,20,0,0" />
+            <TabControl HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="30,20,30,20">
+                <TabItem Header="Nieuw personeel">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Naam van het personeel" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Margin="30,10,0,0" 
+                       Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Name="PersoneelNaamBox"
+                         Width="200"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="30,10,0,0"
+                         Grid.Row="1" Grid.Column="0"/>
+
+                        <Label Content="Rol van het personeel" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Margin="30,10,0,0" 
+                       Grid.Row="2" Grid.Column="0"/>
+                        <TextBox Name="PersoneelRolBox"
+                         Width="200"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="30,10,0,0"
+                         Grid.Row="3" Grid.Column="0"/>
+
+                        <Label Content="AreaId van het personeel" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Margin="30,10,0,0" 
+                       Grid.Row="4" Grid.Column="0"/>
+                        <TextBox Name="PersoneelAreaIdBox"
+                         Width="200"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="30,10,0,0"
+                         Grid.Row="5" Grid.Column="0"/>
+
+                        <Label Content="Email van het personeel" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Margin="30,10,0,0" 
+                       Grid.Row="6" Grid.Column="0"/>
+                        <TextBox Name="PersoneelEmailBox"
+                         Width="200"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="30,10,0,0"
+                         Grid.Row="7" Grid.Column="0"/>
+
+                        <Label Content="Telefoonnummer van het personeel" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Margin="30,10,0,0" 
+                       Grid.Row="8" Grid.Column="0"/>
+                        <TextBox Name="PersoneelTelefoonnummerBox"
+                         Width="200"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="30,10,0,0"
+                         Grid.Row="9" Grid.Column="0"/>
+
+                        <Label Content="Datum van indiensttreding" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Margin="30,10,0,0" 
+                       Grid.Row="10" Grid.Column="0"/>
+                        <TextBox Name="PersoneelIndiensttredingBox"
+                         Width="200"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="30,10,0,0"
+                         Grid.Row="11" Grid.Column="0"/>
+
+                        <Label Content="Actief" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Margin="30,10,0,0" 
+                       Grid.Row="12" Grid.Column="0"/>
+                        <CheckBox Name="PersoneelActiefBox"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="30,10,0,0"
+                         Grid.Row="13" Grid.Column="0"/>
+
+                        <Button Content="Toevoegen"
+                        Width="100"
+                        Height="40"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="10,10,10,30"
+                        Background="#4CAF50"
+                        Foreground="White"
+                        FontSize="16"
+                        BorderBrush="Green"
+                        Click="ToevoegenPersoneelButton_Click"
+                        Grid.Row="14" Grid.Column="0"/>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Alle personeel">
+                    <Grid>
+                        <ListView Name="PersoneelListView" Margin="10">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                    <GridViewColumn Header="Rol" DisplayMemberBinding="{Binding Role}" Width="100"/>
+                                    <GridViewColumn Header="Acties" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Content="🗑️" 
+                                                    Width="30" 
+                                                    Height="30" 
+                                                    Margin="5,0" 
+                                                    Click="DeletePersoneel_Click"/>
+                                                    <Button Content="✏️" 
+                                                    Width="30" 
+                                                    Height="30" 
+                                                    Margin="5,0" 
+                                                    Click="EditPersoneel_Click"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+
+        <StackPanel x:Name="EditPersoneelSection" Visibility="Collapsed" Margin="10">
+            <TextBlock Text="Edit Personeel" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+            <TextBlock Text="Name:" />
+            <TextBox x:Name="PersoneelNameTextBox" />
+            <TextBlock Text="Role:" />
+            <TextBox x:Name="PersoneelRoleTextBox" />
+            <TextBlock Text="Area ID:" />
+            <TextBox x:Name="PersoneelAreaIdTextBox" />
+            <TextBlock Text="Email:" />
+            <TextBox x:Name="PersoneelEmailTextBox" />
+            <TextBlock Text="Phone Number:" />
+            <TextBox x:Name="PersoneelPhoneNumberTextBox" />
+            <TextBlock Text="Hire Date:" />
+            <TextBox x:Name="PersoneelHireDateTextBox" />
+            <TextBlock Text="Active:" />
+            <CheckBox x:Name="PersoneelActiveCheckBox" />
+            <Button Content="Save" Click="SavePersoneelButton_Click" />
+            <Button Content="Cancel" Click="CancelPersoneelButton_Click" />
+        </StackPanel>
     </Grid>
 </UserControl>
