@@ -67,7 +67,7 @@
                        VerticalAlignment="Top" 
                        Margin="30,10,0,0" 
                        Grid.Row="4" Grid.Column="0"/>
-                        <TextBox Name="PersoneelAreaIdBox"
+                        <ComboBox Name="PersoneelAreaIdComboBox"
                          Width="200"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
@@ -176,7 +176,7 @@
             <TextBlock Text="Role:" />
             <TextBox x:Name="PersoneelRoleTextBox" />
             <TextBlock Text="Area ID:" />
-            <TextBox x:Name="PersoneelAreaIdTextBox" />
+            <ComboBox x:Name="PersoneelAreaIdEditComboBox" />
             <TextBlock Text="Email:" />
             <TextBox x:Name="PersoneelEmailTextBox" />
             <TextBlock Text="Phone Number:" />

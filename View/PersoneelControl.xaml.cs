@@ -25,7 +25,30 @@ namespace ParkbeheerderDashboard.View
 
         private async void PersoneelControl_Loaded(object sender, RoutedEventArgs e)
         {
+            await LoadAreasAsync();
             await LoadEmployeesAsync();
+        }
+
+        private async Task LoadAreasAsync()
+        {
+            try
+            {
+                var areas = await _apiService.GetAreasAsync();
+                Dispatcher.Invoke(() =>
+                {
+                    PersoneelAreaIdComboBox.ItemsSource = areas;
+                    PersoneelAreaIdComboBox.DisplayMemberPath = "Name";
+                    PersoneelAreaIdComboBox.SelectedValuePath = "Id";
+
+                    PersoneelAreaIdEditComboBox.ItemsSource = areas;
+                    PersoneelAreaIdEditComboBox.DisplayMemberPath = "Name";
+                    PersoneelAreaIdEditComboBox.SelectedValuePath = "Id";
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Error fetching areas: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private async void ToevoegenPersoneelButton_Click(object sender, RoutedEventArgs e)
@@ -36,7 +59,7 @@ namespace ParkbeheerderDashboard.View
                 {
                     Name = PersoneelNaamBox.Text,
                     Role = PersoneelRolBox.Text,
-                    AreaId = int.Parse(PersoneelAreaIdBox.Text),
+                    AreaId = (int)PersoneelAreaIdComboBox.SelectedValue,
                     Email = PersoneelEmailBox.Text,
                     PhoneNumber = PersoneelTelefoonnummerBox.Text,
                     HireDate = DateTime.Parse(PersoneelIndiensttredingBox.Text),
@@ -98,7 +121,7 @@ namespace ParkbeheerderDashboard.View
                     _currentEmployee = employee;
                     PersoneelNameTextBox.Text = _currentEmployee.Name;
                     PersoneelRoleTextBox.Text = _currentEmployee.Role;
-                    PersoneelAreaIdTextBox.Text = _currentEmployee.AreaId.ToString();
+                    PersoneelAreaIdEditComboBox.SelectedValue = _currentEmployee.AreaId;
                     PersoneelEmailTextBox.Text = _currentEmployee.Email;
                     PersoneelPhoneNumberTextBox.Text = _currentEmployee.PhoneNumber;
                     PersoneelHireDateTextBox.Text = _currentEmployee.HireDate.ToString("yyyy-MM-dd");
@@ -115,7 +138,7 @@ namespace ParkbeheerderDashboard.View
             {
                 _currentEmployee.Name = PersoneelNameTextBox.Text;
                 _currentEmployee.Role = PersoneelRoleTextBox.Text;
-                _currentEmployee.AreaId = int.Parse(PersoneelAreaIdTextBox.Text);
+                _currentEmployee.AreaId = (int)PersoneelAreaIdEditComboBox.SelectedValue;
                 _currentEmployee.Email = PersoneelEmailTextBox.Text;
                 _currentEmployee.PhoneNumber = PersoneelPhoneNumberTextBox.Text;
                 _currentEmployee.HireDate = DateTime.Parse(PersoneelHireDateTextBox.Text);
@@ -159,3 +182,4 @@ namespace ParkbeheerderDashboard.View
         }
     }
 }
+
