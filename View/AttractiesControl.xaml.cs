@@ -56,7 +56,7 @@ namespace ParkbeheerderDashboard.View
                 }
                 else
                 {
-                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van de attractie. Controleer de log voor meer details.");
+                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van de attractie.");
                 }
             }
             catch (Exception ex)
@@ -84,7 +84,7 @@ namespace ParkbeheerderDashboard.View
                         }
                         else
                         {
-                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de attractie. Controleer de log voor meer details.");
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de attractie.");
                         }
                     }
                 }
@@ -291,7 +291,7 @@ namespace ParkbeheerderDashboard.View
                         }
                         else
                         {
-                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de status. Controleer de log voor meer details.");
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de status.");
                         }
                     }
                 }

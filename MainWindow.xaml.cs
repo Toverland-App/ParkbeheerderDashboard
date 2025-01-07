@@ -39,6 +39,11 @@ namespace ParkbeheerderDashboard
         {
             ContentControl.Content = new FeedbackControl();
         }
+
+        private void LoginOverlay_Loaded()
+        {
+
+        }
     }
 }
 

@@ -85,7 +85,7 @@ namespace ParkbeheerderDashboard.View
                         }
                         else
                         {
-                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van het gebied. Controleer de log voor meer details.");
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van het gebied.");
                         }
                     }
                 }
@@ -124,7 +124,7 @@ namespace ParkbeheerderDashboard.View
                 }
                 else
                 {
-                    MessageBox.Show("Er is een fout opgetreden bij het bijwerken van het gebied. Controleer de log voor meer details.");
+                    MessageBox.Show("Er is een fout opgetreden bij het bijwerken van het gebied.");
                 }
             }
         }
