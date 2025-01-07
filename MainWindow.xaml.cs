@@ -35,14 +35,14 @@ namespace ParkbeheerderDashboard
             ContentControl.Content = new BezoekersControl();
         }
 
-        private void OnderhoudButton_Checked(object sender, RoutedEventArgs e)
-        {
-            ContentControl.Content = new OnderhoudControl();
-        }
-
         private void FeedbackButton_Checked(object sender, RoutedEventArgs e)
         {
             ContentControl.Content = new FeedbackControl();
+        }
+
+        private void LoginOverlay_Loaded()
+        {
+
         }
     }
 }
