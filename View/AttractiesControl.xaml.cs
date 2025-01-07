@@ -25,20 +25,48 @@ namespace ParkbeheerderDashboard.View
 
         private async void AttractiesControl_Loaded(object sender, RoutedEventArgs e)
         {
+            await LoadAreasAsync();
             await LoadAttractionsAsync();
             InitializeStatusComboBox();
             await LoadMaintenancesAsync();
         }
 
+        private async Task LoadAreasAsync()
+        {
+            try
+            {
+                var areas = await _apiService.GetAreasAsync();
+                Dispatcher.Invoke(() =>
+                {
+                    AreaIdComboBox.ItemsSource = areas;
+                    AreaIdComboBox.DisplayMemberPath = "Name";
+                    AreaIdComboBox.SelectedValuePath = "Id";
+
+                    AreaIdEditComboBox.ItemsSource = areas;
+                    AreaIdEditComboBox.DisplayMemberPath = "Name";
+                    AreaIdEditComboBox.SelectedValuePath = "Id";
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Error fetching areas: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private async void ToevoegenButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!ValidateAttractionInputs())
+            {
+                return;
+            }
+
             try
             {
                 var attraction = new Attraction
                 {
                     Name = AttractieNaamBox.Text,
                     MinHeight = double.Parse(MinHeightBox.Text),
-                    AreaId = int.Parse(AreaIdBox.Text),
+                    AreaId = (int)AreaIdComboBox.SelectedValue,
                     Description = DescriptionBox.Text,
                     OpeningTime = OpeningTimeBox.Text,
                     ClosingTime = ClosingTimeBox.Text,
@@ -56,7 +84,7 @@ namespace ParkbeheerderDashboard.View
                 }
                 else
                 {
-                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van de attractie.");
+                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van de attractie. Controleer de log voor meer details.");
                 }
             }
             catch (Exception ex)
@@ -84,7 +112,7 @@ namespace ParkbeheerderDashboard.View
                         }
                         else
                         {
-                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de attractie.");
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de attractie. Controleer de log voor meer details.");
                         }
                     }
                 }
@@ -102,7 +130,7 @@ namespace ParkbeheerderDashboard.View
                     _currentAttraction = attraction;
                     NameTextBox.Text = _currentAttraction.Name;
                     MinHeightTextBox.Text = _currentAttraction.MinHeight.ToString();
-                    AreaIdTextBox.Text = _currentAttraction.AreaId.ToString();
+                    AreaIdEditComboBox.SelectedValue = _currentAttraction.AreaId;
                     DescriptionTextBox.Text = _currentAttraction.Description;
                     OpeningTimeTextBox.Text = _currentAttraction.OpeningTime;
                     ClosingTimeTextBox.Text = _currentAttraction.ClosingTime;
@@ -117,37 +145,16 @@ namespace ParkbeheerderDashboard.View
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!ValidateAttractionInputs())
+            {
+                return;
+            }
+
             if (_currentAttraction != null)
             {
-                if (string.IsNullOrWhiteSpace(NameTextBox.Text) ||
-                    string.IsNullOrWhiteSpace(MinHeightTextBox.Text) ||
-                    string.IsNullOrWhiteSpace(AreaIdTextBox.Text) ||
-                    string.IsNullOrWhiteSpace(DescriptionTextBox.Text) ||
-                    string.IsNullOrWhiteSpace(OpeningTimeTextBox.Text) ||
-                    string.IsNullOrWhiteSpace(ClosingTimeTextBox.Text) ||
-                    string.IsNullOrWhiteSpace(CapacityTextBox.Text) ||
-                    string.IsNullOrWhiteSpace(QueueSpeedTextBox.Text) ||
-                    string.IsNullOrWhiteSpace(QueueLengthTextBox.Text))
-                {
-                    MessageBox.Show("Vul alle velden in.", "Validatie Fout", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                if (!double.TryParse(MinHeightTextBox.Text, out _) ||
-                    !int.TryParse(AreaIdTextBox.Text, out _) ||
-                    !TimeSpan.TryParse(OpeningTimeTextBox.Text, out _) ||
-                    !TimeSpan.TryParse(ClosingTimeTextBox.Text, out _) ||
-                    !int.TryParse(CapacityTextBox.Text, out _) ||
-                    !int.TryParse(QueueSpeedTextBox.Text, out _) ||
-                    !int.TryParse(QueueLengthTextBox.Text, out _))
-                {
-                    MessageBox.Show("Controleer of alle velden correct zijn ingevuld.", "Validatie Fout", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
                 _currentAttraction.Name = NameTextBox.Text;
                 _currentAttraction.MinHeight = double.Parse(MinHeightTextBox.Text);
-                _currentAttraction.AreaId = int.Parse(AreaIdTextBox.Text);
+                _currentAttraction.AreaId = (int)AreaIdEditComboBox.SelectedValue;
                 _currentAttraction.Description = DescriptionTextBox.Text;
                 _currentAttraction.OpeningTime = OpeningTimeTextBox.Text;
                 _currentAttraction.ClosingTime = ClosingTimeTextBox.Text;
@@ -169,7 +176,6 @@ namespace ParkbeheerderDashboard.View
                 }
             }
         }
-
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -200,38 +206,19 @@ namespace ParkbeheerderDashboard.View
             }
         }
 
-        private async void PostButton_Click(object sender, RoutedEventArgs e)
+        private void InitializeStatusComboBox()
         {
-            string attractie = AttractieComboBox.Text;
-            string status = StatusComboBox.Text;
-            string opmerkingen = OpmerkingenBox.Text;
+            StatusComboBox.Items.Clear();
+            StatusComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer status" });
 
-            if (attractie == "Selecteer attractie" || status == "Selecteer status" || opmerkingen == "Voer opmerkingen in...")
+            var predefinedStatuses = new List<string> { "Onderhoud", "Storing", "Weersomstandigheden" };
+
+            foreach (var status in predefinedStatuses)
             {
-                MessageBox.Show("Vul alle velden in voordat u post.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                StatusComboBox.Items.Add(new ComboBoxItem { Content = status });
             }
-            else
-            {
-                // Stuur de gegevens naar de API
-                var selectedAttraction = (ComboBoxItem)AttractieComboBox.SelectedItem;
-                int attractionId = selectedAttraction != null && selectedAttraction.Tag != null ? ((Attraction)selectedAttraction.Tag).Id : 0;
 
-                bool success = await _apiService.AddMaintenanceAsync(attractionId, attractie, status, opmerkingen);
-
-                if (success)
-                {
-                    MessageBox.Show("Statusupdate doorgevoerd.", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                    await LoadAttractionsAsync();
-                    InitializeStatusComboBox();
-                    SetOpmerkingenBoxPlaceholder();
-                    await LoadMaintenancesAsync();
-                }
-                else
-                {
-                    MessageBox.Show("Fout bij het doorvoeren van de statusupdate.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
+            StatusComboBox.SelectedIndex = 0;
         }
 
         private async Task LoadMaintenancesAsync()
@@ -261,12 +248,6 @@ namespace ParkbeheerderDashboard.View
             }
         }
 
-        private void SetOpmerkingenBoxPlaceholder()
-        {
-            OpmerkingenBox.Text = "Voer opmerkingen in...";
-            OpmerkingenBox.Foreground = Brushes.Gray;
-        }
-
         private void OpmerkingenBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (OpmerkingenBox.Text == "Voer opmerkingen in...")
@@ -280,23 +261,48 @@ namespace ParkbeheerderDashboard.View
         {
             if (string.IsNullOrWhiteSpace(OpmerkingenBox.Text))
             {
-                SetOpmerkingenBoxPlaceholder();
+                OpmerkingenBox.Text = "Voer opmerkingen in...";
+                OpmerkingenBox.Foreground = Brushes.Gray;
             }
         }
 
-        private void InitializeStatusComboBox()
+        private async void PostButton_Click(object sender, RoutedEventArgs e)
         {
-            StatusComboBox.Items.Clear();
-            StatusComboBox.Items.Add(new ComboBoxItem { Content = "Selecteer status" });
+            string attractie = AttractieComboBox.Text;
+            string status = StatusComboBox.Text;
+            string opmerkingen = OpmerkingenBox.Text;
 
-            var predefinedStatuses = new List<string> { "Onderhoud", "Storing", "Weersomstandigheden" };
-
-            foreach (var status in predefinedStatuses)
+            if (attractie == "Selecteer attractie" || status == "Selecteer status" || opmerkingen == "Voer opmerkingen in...")
             {
-                StatusComboBox.Items.Add(new ComboBoxItem { Content = status });
+                MessageBox.Show("Vul alle velden in voordat u post.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else
+            {
+                var selectedAttraction = (ComboBoxItem)AttractieComboBox.SelectedItem;
+                int attractionId = selectedAttraction != null && selectedAttraction.Tag != null ? ((Attraction)selectedAttraction.Tag).Id : 0;
 
-            StatusComboBox.SelectedIndex = 0;
+                bool success = await _apiService.AddMaintenanceAsync(attractionId, attractie, status, opmerkingen);
+
+                if (success)
+                {
+                    MessageBox.Show("Statusupdate doorgevoerd.", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    await LoadAttractionsAsync();
+                    InitializeStatusComboBox();
+                    SetOpmerkingenBoxPlaceholder();
+                    await LoadMaintenancesAsync();
+                }
+                else
+                {
+                    MessageBox.Show("Fout bij het doorvoeren van de statusupdate.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void SetOpmerkingenBoxPlaceholder()
+        {
+            OpmerkingenBox.Text = "Voer opmerkingen in...";
+            OpmerkingenBox.Foreground = Brushes.Gray;
         }
 
         private async void DeleteMaintenance_Click(object sender, RoutedEventArgs e)
@@ -318,11 +324,71 @@ namespace ParkbeheerderDashboard.View
                         }
                         else
                         {
-                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de status.");
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de status. Controleer de log voor meer details.");
                         }
                     }
                 }
             }
         }
+
+        private bool ValidateAttractionInputs()
+        {
+            if (string.IsNullOrWhiteSpace(AttractieNaamBox.Text))
+            {
+                MessageBox.Show("Naam van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (!double.TryParse(MinHeightBox.Text, out _))
+            {
+                MessageBox.Show("Min Height van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (AreaIdComboBox.SelectedValue == null)
+            {
+                MessageBox.Show("Selecteer een geldige AreaId voor de attractie.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(DescriptionBox.Text))
+            {
+                MessageBox.Show("Description van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(OpeningTimeBox.Text))
+            {
+                MessageBox.Show("Opening Time van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(ClosingTimeBox.Text))
+            {
+                MessageBox.Show("Closing Time van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (!int.TryParse(CapacityBox.Text, out _))
+            {
+                MessageBox.Show("Capacity van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (!int.TryParse(QueueSpeedBox.Text, out _))
+            {
+                MessageBox.Show("Queue Speed van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (!int.TryParse(QueueLengthBox.Text, out _))
+            {
+                MessageBox.Show("Queue Length van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
     }
 }
+
