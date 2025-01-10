@@ -165,14 +165,14 @@ namespace ParkbeheerderDashboard.View
                 var success = await _apiService.UpdateAttractionAsync(_currentAttraction.Id, _currentAttraction);
                 if (success)
                 {
-                    MessageBox.Show("Attraction successfully updated!");
+                    MessageBox.Show("Attractie succesvol bijgewerkt!");
                     EditSection.Visibility = Visibility.Collapsed;
                     AttractiesContent.Visibility = Visibility.Visible;
                     await LoadAttractionsAsync();
                 }
                 else
                 {
-                    MessageBox.Show("An error occurred while updating the attraction. Check the log for more details.");
+                    MessageBox.Show("Er vindt een error plaats bij het bijwerken van de attractie.");
                 }
             }
         }

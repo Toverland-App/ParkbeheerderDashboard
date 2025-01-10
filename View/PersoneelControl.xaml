@@ -38,7 +38,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Content="Naam van het personeel" 
+                        <Label Content="Naam" 
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Top" 
                        Margin="30,10,0,0" 
@@ -50,7 +50,7 @@
                          Margin="30,10,0,0"
                          Grid.Row="1" Grid.Column="0"/>
 
-                        <Label Content="Rol van het personeel" 
+                        <Label Content="Functie" 
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Top" 
                        Margin="30,10,0,0" 
@@ -62,7 +62,7 @@
                          Margin="30,10,0,0"
                          Grid.Row="3" Grid.Column="0"/>
 
-                        <Label Content="AreaId van het personeel" 
+                        <Label Content="Gebied" 
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Top" 
                        Margin="30,10,0,0" 
@@ -74,7 +74,7 @@
                          Margin="30,10,0,0"
                          Grid.Row="5" Grid.Column="0"/>
 
-                        <Label Content="Email van het personeel" 
+                        <Label Content="Email" 
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Top" 
                        Margin="30,10,0,0" 
@@ -86,7 +86,7 @@
                          Margin="30,10,0,0"
                          Grid.Row="7" Grid.Column="0"/>
 
-                        <Label Content="Telefoonnummer van het personeel" 
+                        <Label Content="Telefoonnummer" 
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Top" 
                        Margin="30,10,0,0" 
@@ -142,7 +142,7 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                                    <GridViewColumn Header="Rol" DisplayMemberBinding="{Binding Role}" Width="100"/>
+                                    <GridViewColumn Header="Functie" DisplayMemberBinding="{Binding Role}" Width="100"/>
                                     <GridViewColumn Header="Acties" Width="100">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -171,22 +171,22 @@
 
         <StackPanel x:Name="EditPersoneelSection" Visibility="Collapsed" Margin="10">
             <TextBlock Text="Edit Personeel" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
-            <TextBlock Text="Name:" />
+            <TextBlock Text="Naam:" />
             <TextBox x:Name="PersoneelNameTextBox" />
-            <TextBlock Text="Role:" />
+            <TextBlock Text="Functie:" />
             <TextBox x:Name="PersoneelRoleTextBox" />
-            <TextBlock Text="Area ID:" />
+            <TextBlock Text="Gebied:" />
             <ComboBox x:Name="PersoneelAreaIdEditComboBox" />
             <TextBlock Text="Email:" />
             <TextBox x:Name="PersoneelEmailTextBox" />
-            <TextBlock Text="Phone Number:" />
+            <TextBlock Text="Telefoonnummer:" />
             <TextBox x:Name="PersoneelPhoneNumberTextBox" />
-            <TextBlock Text="Hire Date:" />
+            <TextBlock Text="Datum indiensttreding:" />
             <TextBox x:Name="PersoneelHireDateTextBox" />
-            <TextBlock Text="Active:" />
+            <TextBlock Text="Actief:" />
             <CheckBox x:Name="PersoneelActiveCheckBox" />
-            <Button Content="Save" Click="SavePersoneelButton_Click" />
-            <Button Content="Cancel" Click="CancelPersoneelButton_Click" />
+            <Button Content="Opslaan" Click="SavePersoneelButton_Click" />
+            <Button Content="Annuleren" Click="CancelPersoneelButton_Click" />
         </StackPanel>
     </Grid>
 </UserControl>

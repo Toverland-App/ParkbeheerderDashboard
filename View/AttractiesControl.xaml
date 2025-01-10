@@ -169,7 +169,7 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                                    <GridViewColumn Header="AreaId" DisplayMemberBinding="{Binding AreaId}" Width="100"/>
+                                    <GridViewColumn Header="Gebied" DisplayMemberBinding="{Binding AreaId}" Width="100"/>
                                     <GridViewColumn Header="Acties" Width="100">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -258,7 +258,7 @@
                                 <GridView>
                                     <GridViewColumn Header="Attractie" DisplayMemberBinding="{Binding AttractionName}" Width="120"/>
                                     <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="135"/>
-                                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="175"/>
+                                    <GridViewColumn Header="Beschrijving" DisplayMemberBinding="{Binding Description}" Width="175"/>
                                     <GridViewColumn Header="Acties" Width="50">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -281,27 +281,27 @@
         </Grid>
 
         <StackPanel x:Name="EditSection" Visibility="Collapsed" Margin="10">
-            <TextBlock Text="Edit Attraction" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
-            <TextBlock Text="Name:" />
+            <TextBlock Text="Aanpassen van attractie" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+            <TextBlock Text="Naam:" />
             <TextBox x:Name="NameTextBox" />
-            <TextBlock Text="Min Height:" />
-            <TextBox x:Name="MinHeightTextBox" />
-            <TextBlock Text="Area ID:" />
+            <TextBlock Text="Gebied:" />
             <ComboBox x:Name="AreaIdEditComboBox" />
-            <TextBlock Text="Description:" />
+            <TextBlock Text="Min lengte:" />
+            <TextBox x:Name="MinHeightTextBox" />
+            <TextBlock Text="Beschrijving:" />
             <TextBox x:Name="DescriptionTextBox" />
-            <TextBlock Text="Opening Time:" />
+            <TextBlock Text="Openingstijd:" />
             <TextBox x:Name="OpeningTimeTextBox" />
-            <TextBlock Text="Closing Time:" />
+            <TextBlock Text="Sluitingstijd:" />
             <TextBox x:Name="ClosingTimeTextBox" />
-            <TextBlock Text="Capacity:" />
+            <TextBlock Text="Capaciteit:" />
             <TextBox x:Name="CapacityTextBox" />
-            <TextBlock Text="Queue Speed:" />
+            <TextBlock Text="Wachtrij snelheid:" />
             <TextBox x:Name="QueueSpeedTextBox" />
-            <TextBlock Text="Queue Length:" />
+            <TextBlock Text="Wachtrij lengte:" />
             <TextBox x:Name="QueueLengthTextBox" />
-            <Button Content="Save" Click="SaveButton_Click" />
-            <Button Content="Cancel" Click="CancelButton_Click" />
+            <Button Content="Opslaan" Click="SaveButton_Click" />
+            <Button Content="Annuleren" Click="CancelButton_Click" />
         </StackPanel>
     </Grid>
 </UserControl>
