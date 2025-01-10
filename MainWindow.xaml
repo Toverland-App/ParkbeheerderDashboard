@@ -4,7 +4,7 @@
         xmlns:view="clr-namespace:ParkbeheerderDashboard.View"
         xmlns:local="clr-namespace:ParkbeheerderDashboard"
         Title="Attractie Status Beheer"
-        Height="600"
+        Height="675"
         Width="800">
     <Grid>
         <Grid.Background>
@@ -41,7 +41,7 @@
                              FontWeight="Bold"
                              GroupName="Menu"
                              Checked="FeedbackButton_Checked" />
-                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Height="200"/>
+                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Height="250"/>
                 <Image Source="/Assets/Toverland_logo.png"
                            Stretch="UniformToFill"
                            Panel.ZIndex="1" RenderTransformOrigin="0.532,-1.059" Height="212"/>
