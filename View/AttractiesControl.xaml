@@ -52,7 +52,7 @@
                     VerticalAlignment="Top"
                     Margin="30,30,0,0"
                     Grid.Row="1" Grid.Column="0"/>
-                        <Label Content="Min Height van de attractie" 
+                        <Label Content="Min. Lengte van de bezoeker" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
                     Margin="30,10,0,0" 
@@ -64,7 +64,7 @@
                     Margin="30,30,0,0"
                     Grid.Row="3" Grid.Column="0"/>
 
-                        <Label Content="AreaId van de attractie" 
+                        <Label Content="Gebied" 
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Top" 
                     Margin="0,10,30,0" 
@@ -76,7 +76,7 @@
                     Margin="0,30,30,0"
                     Grid.Row="1" Grid.Column="1"/>
 
-                        <Label Content="Description van de attractie" 
+                        <Label Content="Beschrijving" 
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Top" 
                     Margin="0,10,30,0" 
@@ -88,7 +88,7 @@
                     Margin="0,30,30,0"
                     Grid.Row="3" Grid.Column="1"/>
 
-                        <Label Content="Opening Time van de attractie" 
+                        <Label Content="Openingstijd" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
                     Margin="30,10,0,0" 
@@ -100,7 +100,7 @@
                     Margin="30,30,0,0"
                     Grid.Row="5" Grid.Column="0"/>
 
-                        <Label Content="Closing Time van de attractie" 
+                        <Label Content="Sluitingstijd" 
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Top" 
                     Margin="0,10,30,0" 
@@ -112,7 +112,7 @@
                     Margin="0,30,30,0"
                     Grid.Row="5" Grid.Column="1"/>
 
-                        <Label Content="Capacity van de attractie" 
+                        <Label Content="Capaciteit" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
                     Margin="30,10,0,0" 
@@ -124,7 +124,7 @@
                     Margin="30,30,0,0"
                     Grid.Row="7" Grid.Column="0"/>
 
-                        <Label Content="Queue Speed van de attractie" 
+                        <Label Content="Wachtrij snelheid" 
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Top" 
                     Margin="0,10,30,0" 
@@ -136,7 +136,7 @@
                     Margin="0,30,30,0"
                     Grid.Row="7" Grid.Column="1"/>
 
-                        <Label Content="Queue Length van de attractie" 
+                        <Label Content="Wachtrij lengte" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
                     Margin="30,10,0,0" 
