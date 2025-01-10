@@ -75,7 +75,7 @@ namespace ParkbeheerderDashboard.View
                 }
                 else
                 {
-                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van het personeel. Controleer de log voor meer details.");
+                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van het personeel.");
                 }
             }
             catch (Exception ex)
@@ -103,7 +103,7 @@ namespace ParkbeheerderDashboard.View
                         }
                         else
                         {
-                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van het personeel. Controleer de log voor meer details.");
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van het personeel.");
                         }
                     }
                 }
@@ -154,7 +154,7 @@ namespace ParkbeheerderDashboard.View
                 }
                 else
                 {
-                    MessageBox.Show("Er is een fout opgetreden bij het bijwerken van het personeel. Controleer de log voor meer details.");
+                    MessageBox.Show("Er is een fout opgetreden bij het bijwerken van het personeel.");
                 }
             }
         }

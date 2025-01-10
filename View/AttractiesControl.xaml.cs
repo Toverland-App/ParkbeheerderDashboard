@@ -84,7 +84,7 @@ namespace ParkbeheerderDashboard.View
                 }
                 else
                 {
-                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van de attractie. Controleer de log voor meer details.");
+                    MessageBox.Show("Er is een fout opgetreden bij het toevoegen van de attractie.");
                 }
             }
             catch (Exception ex)
@@ -112,7 +112,7 @@ namespace ParkbeheerderDashboard.View
                         }
                         else
                         {
-                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de attractie. Controleer de log voor meer details.");
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de attractie.");
                         }
                     }
                 }
@@ -324,7 +324,7 @@ namespace ParkbeheerderDashboard.View
                         }
                         else
                         {
-                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de status. Controleer de log voor meer details.");
+                            MessageBox.Show("Er is een fout opgetreden bij het verwijderen van de status.");
                         }
                     }
                 }
@@ -349,43 +349,43 @@ namespace ParkbeheerderDashboard.View
 
                 if (AreaIdEditComboBox.SelectedValue == null)
                 {
-                    MessageBox.Show("Selecteer een geldige AreaId voor de attractie.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Selecteer een geldige gebied voor de attractie.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(DescriptionTextBox.Text))
                 {
-                    MessageBox.Show("Description van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Beschrijving van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(OpeningTimeTextBox.Text))
                 {
-                    MessageBox.Show("Opening Time van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Openingstijd van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(ClosingTimeTextBox.Text))
                 {
-                    MessageBox.Show("Closing Time van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Sluitingstijd van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (!int.TryParse(CapacityTextBox.Text, out _))
                 {
-                    MessageBox.Show("Capacity van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Capaciteit van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (!int.TryParse(QueueSpeedTextBox.Text, out _))
                 {
-                    MessageBox.Show("Queue Speed van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Wachtrij snelheid van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (!int.TryParse(QueueLengthTextBox.Text, out _))
                 {
-                    MessageBox.Show("Queue Length van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Wachtrij lengte van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
             }
@@ -399,49 +399,49 @@ namespace ParkbeheerderDashboard.View
 
                 if (!double.TryParse(MinHeightBox.Text, out _))
                 {
-                    MessageBox.Show("Min Height van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Min lengte van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (AreaIdComboBox.SelectedValue == null)
                 {
-                    MessageBox.Show("Selecteer een geldige AreaId voor de attractie.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Selecteer een geldige gebied voor de attractie.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(DescriptionBox.Text))
                 {
-                    MessageBox.Show("Description van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Beschrijving van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(OpeningTimeBox.Text))
                 {
-                    MessageBox.Show("Opening Time van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Openingstijd van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(ClosingTimeBox.Text))
                 {
-                    MessageBox.Show("Closing Time van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Sluitingstijd van de attractie is verplicht.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (!int.TryParse(CapacityBox.Text, out _))
                 {
-                    MessageBox.Show("Capacity van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Capaciteit van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (!int.TryParse(QueueSpeedBox.Text, out _))
                 {
-                    MessageBox.Show("Queue Speed van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Wachtrij snelheid van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
 
                 if (!int.TryParse(QueueLengthBox.Text, out _))
                 {
-                    MessageBox.Show("Queue Length van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Wachtrij lengte van de attractie moet een geldig getal zijn.", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
             }
