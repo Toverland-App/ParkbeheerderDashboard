@@ -31,7 +31,7 @@ namespace ParkbeheerderDashboard
 
         private void RemoveText(object sender, RoutedEventArgs e)
         {
-            if (UsernameTextBox.Text == "Username")
+            if (UsernameTextBox.Text == "Gebruikersnaam")
             {
                 UsernameTextBox.Text = "";
                 UsernameTextBox.Foreground = Brushes.Black;
@@ -42,7 +42,7 @@ namespace ParkbeheerderDashboard
         {
             if (string.IsNullOrWhiteSpace(UsernameTextBox.Text))
             {
-                UsernameTextBox.Text = "Username";
+                UsernameTextBox.Text = "Gebruikersnaam";
                 UsernameTextBox.Foreground = Brushes.Gray;
             }
         }

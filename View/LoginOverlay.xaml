@@ -7,7 +7,7 @@
         <!-- Semi-transparent background -->
         <Border Background="White" Padding="20" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel>
-                <TextBox x:Name="UsernameTextBox" Margin="10" Width="200" Text="Username" Foreground="Gray" GotFocus="RemoveText" LostFocus="AddText"/>
+                <TextBox x:Name="UsernameTextBox" Margin="10" Width="200" Text="Gebruikersnaam" Foreground="Gray" GotFocus="RemoveText" LostFocus="AddText"/>
                 <PasswordBox x:Name="PasswordBox" Margin="10" Width="200" Password="Password" Foreground="Gray" GotFocus="RemovePasswordText" LostFocus="AddPasswordText"/>
                 <Button Content="Login" Click="LoginButton_Click" Margin="10"/>
             </StackPanel>
