@@ -58,11 +58,42 @@ namespace ParkbeheerderDashboard.View
                 Dispatcher.Invoke(() =>
                 {
                     GebiedenListView.ItemsSource = areas;
+                    GebiedComboBox.ItemsSource = areas;
                 });
             }
             catch (HttpRequestException ex)
             {
                 MessageBox.Show($"Error fetching areas: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async void GebiedComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (GebiedComboBox.SelectedItem is Area selectedArea)
+            {
+                await LoadEmployeesByAreaAsync(selectedArea.Id);
+            }
+            else
+            {
+                PersoneelListView.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private async Task LoadEmployeesByAreaAsync(int areaId)
+        {
+            try
+            {
+                var employees = await _apiService.GetEmployeesAsync();
+                var filteredEmployees = employees.Where(emp => emp.AreaId == areaId).ToList();
+                Dispatcher.Invoke(() =>
+                {
+                    PersoneelListView.ItemsSource = filteredEmployees;
+                    PersoneelListView.Visibility = filteredEmployees.Any() ? Visibility.Visible : Visibility.Collapsed;
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Error fetching employees: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -84,6 +84,38 @@
                         </ListView>
                     </Grid>
                 </TabItem>
+                <TabItem Header="Personeel per gebied" HorizontalAlignment="Right">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <ComboBox Name="GebiedComboBox" SelectionChanged="GebiedComboBox_SelectionChanged" Margin="10">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <ListView Name="PersoneelListView" Margin="10" Visibility="Collapsed">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Naam" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                        <GridViewColumn Header="Functie" DisplayMemberBinding="{Binding Role}" Width="150"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                    </Grid>
+                </TabItem>
             </TabControl>
         </StackPanel>
 
