@@ -6,10 +6,35 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Hello World!" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   FontSize="24" 
-                   FontWeight="Bold"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Image Source="pack://application:,,,/Assets/Green_Smiley.png"
+               Stretch="Uniform"
+               Grid.Column="0"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Width="100"
+               Height="100" />
+
+        <Image Source="pack://application:,,,/Assets/Yellow_Smiley.png"
+               Stretch="Uniform"
+               Grid.Column="1"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Width="100"
+               Height="100" />
+
+        <Image Source="pack://application:,,,/Assets/Red_Smiley.png"
+               Stretch="Uniform"
+               Grid.Column="2"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Width="100"
+               Height="100" />
     </Grid>
 </UserControl>
+
