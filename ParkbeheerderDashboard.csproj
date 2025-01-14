@@ -172,7 +172,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\Green_Smiley.png" />
+    <Resource Include="Assets\Red_Smiley.png" />
+    <Resource Include="Assets\Yellow_Smiley.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Toverland_Logo.png" />
   </ItemGroup>

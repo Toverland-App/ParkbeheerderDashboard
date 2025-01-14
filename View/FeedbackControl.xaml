@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Image Source="pack://application:,,,/Assets/Green_Smiley.png"
+        <Image Source="/Assets/Green_Smiley.png"
                Stretch="Uniform"
                Grid.Column="0"
                HorizontalAlignment="Center"
@@ -20,7 +20,7 @@
                Width="100"
                Height="100" />
 
-        <Image Source="pack://application:,,,/Assets/Yellow_Smiley.png"
+        <Image Source="/Assets/Yellow_Smiley.png"
                Stretch="Uniform"
                Grid.Column="1"
                HorizontalAlignment="Center"
@@ -28,7 +28,7 @@
                Width="100"
                Height="100" />
 
-        <Image Source="pack://application:,,,/Assets/Red_Smiley.png"
+        <Image Source="/Assets/Red_Smiley.png"
                Stretch="Uniform"
                Grid.Column="2"
                HorizontalAlignment="Center"
