@@ -81,6 +81,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Feedback.cs" />
     <Compile Include="View\AttractiesControl.xaml.cs">
       <DependentUpon>AttractiesControl.xaml</DependentUpon>
     </Compile>

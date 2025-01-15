@@ -157,6 +157,15 @@ namespace ParkbeheerderDashboard.Models
             var response = await _httpClient.DeleteAsync($"api/Employee/{id}");
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<List<Feedback>> GetFeedbackAsync()
+        {
+            var response = await _httpClient.GetAsync("api/Feedback");
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<Feedback>>(json);
+        }
+
     }
 }
 
