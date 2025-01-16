@@ -119,7 +119,6 @@ namespace ParkbeheerderDashboard.Models
             return response.IsSuccessStatusCode;
         }
 
-        // Employee CRUD operations
         public async Task<List<Employee>> GetEmployeesAsync()
         {
             var response = await _httpClient.GetAsync("api/Employee");
