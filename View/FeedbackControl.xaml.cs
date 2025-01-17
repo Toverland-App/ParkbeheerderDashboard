@@ -14,6 +14,7 @@ namespace ParkbeheerderDashboard.View
     public partial class FeedbackControl : UserControl
     {
         private readonly ApiService _apiService;
+        private List<Feedback> _feedbackList;
 
         public FeedbackControl()
         {
@@ -31,10 +32,10 @@ namespace ParkbeheerderDashboard.View
         {
             try
             {
-                var feedbackList = await _apiService.GetFeedbackAsync();
-                var groupedFeedback = feedbackList.GroupBy(f => f.Rating)
-                                                  .Select(g => new { Rating = g.Key, Count = g.Count() })
-                                                  .ToDictionary(g => g.Rating, g => g.Count);
+                _feedbackList = await _apiService.GetFeedbackAsync();
+                var groupedFeedback = _feedbackList.GroupBy(f => f.Rating)
+                                                   .Select(g => new { Rating = g.Key, Count = g.Count() })
+                                                   .ToDictionary(g => g.Rating, g => g.Count);
 
                 Dispatcher.Invoke(() =>
                 {
@@ -48,6 +49,18 @@ namespace ParkbeheerderDashboard.View
                 MessageBox.Show($"Error fetching feedback: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void SmileyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SmileyComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                int rating = int.Parse(selectedItem.Tag.ToString());
+                var filteredFeedback = _feedbackList.Where(f => f.Rating == rating).ToList();
+                DescriptionListView.ItemsSource = filteredFeedback;
+            }
+        }
     }
 }
+
+
 

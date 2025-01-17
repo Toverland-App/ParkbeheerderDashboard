@@ -2,7 +2,7 @@
 {
     private int _id;
     private int _rating;
-    private string _comment;
+    private string _description;
 
     public int Id
     {
@@ -16,9 +16,9 @@
         set { _rating = value; }
     }
 
-    public string Comment
+    public string Description
     {
-        get { return _comment; }
-        set { _comment = value; }
+        get { return _description; }
+        set { _description = value; }
     }
 }
