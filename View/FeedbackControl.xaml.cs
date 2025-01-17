@@ -54,13 +54,26 @@ namespace ParkbeheerderDashboard.View
         {
             if (SmileyComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
-                int rating = int.Parse(selectedItem.Tag.ToString());
-                var filteredFeedback = _feedbackList.Where(f => f.Rating == rating).ToList();
-                DescriptionListView.ItemsSource = filteredFeedback;
+                if (selectedItem.Tag != null)
+                {
+                    int rating = int.Parse(selectedItem.Tag.ToString());
+                    var filteredFeedback = _feedbackList.Where(f => f.Rating == rating).ToList();
+                    if (DescriptionListView != null)
+                    {
+                        DescriptionListView.ItemsSource = filteredFeedback;
+                    }
+                }
+                else
+                {
+                    // Handle the case where Tag is null
+                    if (DescriptionListView != null)
+                    {
+                        DescriptionListView.ItemsSource = null;
+                    }
+                }
             }
         }
+
+
     }
 }
-
-
-

@@ -6,35 +6,43 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0">
+            <StackPanel Margin="10,0">
+                <TextBlock x:Name="Smiley1Counter" Text="0" HorizontalAlignment="Center" FontSize="24"/>
+                <Image Source="/Assets/Red_Smiley.png" Width="100" Height="100"/>
+            </StackPanel>
+            <StackPanel Margin="10,0">
+                <TextBlock x:Name="Smiley2Counter" Text="0" HorizontalAlignment="Center" FontSize="24"/>
+                <Image Source="/Assets/Yellow_Smiley.png" Width="100" Height="100"/>
+            </StackPanel>
+            <StackPanel Margin="10,0">
+                <TextBlock x:Name="Smiley3Counter" Text="0" HorizontalAlignment="Center" FontSize="24"/>
+                <Image Source="/Assets/Green_Smiley.png" Width="100" Height="100"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
             <ComboBox x:Name="SmileyComboBox" SelectionChanged="SmileyComboBox_SelectionChanged" Width="200" Margin="10">
+                <ComboBoxItem Content="Selecteer uw keuze" IsSelected="True" IsEnabled="False"/>
                 <ComboBoxItem Content="Red Smiley" Tag="0"/>
                 <ComboBoxItem Content="Yellow Smiley" Tag="1"/>
                 <ComboBoxItem Content="Green Smiley" Tag="2"/>
             </ComboBox>
-            <ListView x:Name="DescriptionListView" Width="400" Height="200" Margin="10">
+            <ListView x:Name="DescriptionListView" Width="500" Height="200" Margin="10">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="380"/>
+                        <GridViewColumn Header="Opmerkingen" DisplayMemberBinding="{Binding Description}" Width="480"/>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel Margin="10,0">
-                    <TextBlock x:Name="Smiley1Counter" Text="0" HorizontalAlignment="Center" FontSize="24"/>
-                    <Image Source="/Assets/Red_Smiley.png" Width="100" Height="100"/>
-                </StackPanel>
-                <StackPanel Margin="10,0">
-                    <TextBlock x:Name="Smiley2Counter" Text="0" HorizontalAlignment="Center" FontSize="24"/>
-                    <Image Source="/Assets/Yellow_Smiley.png" Width="100" Height="100"/>
-                </StackPanel>
-                <StackPanel Margin="10,0">
-                    <TextBlock x:Name="Smiley3Counter" Text="0" HorizontalAlignment="Center" FontSize="24"/>
-                    <Image Source="/Assets/Green_Smiley.png" Width="100" Height="100"/>
-                </StackPanel>
-            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
-
-
