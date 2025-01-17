@@ -4,37 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-        <Image Source="/Assets/Green_Smiley.png"
-               Stretch="Uniform"
-               Grid.Column="0"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Width="100"
-               Height="100" />
-
-        <Image Source="/Assets/Yellow_Smiley.png"
-               Stretch="Uniform"
-               Grid.Column="1"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Width="100"
-               Height="100" />
-
-        <Image Source="/Assets/Red_Smiley.png"
-               Stretch="Uniform"
-               Grid.Column="2"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Width="100"
-               Height="100" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="10,0">
+                <TextBlock x:Name="Smiley1Counter" Text="0" HorizontalAlignment="Center" FontSize="24"/>
+                <Image Source="/Assets/Red_Smiley.png" Width="100" Height="100"/>
+            </StackPanel>
+            <StackPanel Margin="10,0">
+                <TextBlock x:Name="Smiley2Counter" Text="0" HorizontalAlignment="Center" FontSize="24"/>
+                <Image Source="/Assets/Yellow_Smiley.png" Width="100" Height="100"/>
+            </StackPanel>
+            <StackPanel Margin="10,0">
+                <TextBlock x:Name="Smiley3Counter" Text="0" HorizontalAlignment="Center" FontSize="24"/>
+                <Image Source="/Assets/Green_Smiley.png" Width="100" Height="100"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>
+
+

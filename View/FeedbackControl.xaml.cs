@@ -38,11 +38,9 @@ namespace ParkbeheerderDashboard.View
 
                 Dispatcher.Invoke(() =>
                 {
-                    Smiley1Counter.Text = groupedFeedback.ContainsKey(1) ? groupedFeedback[1].ToString() : "0";
-                    Smiley2Counter.Text = groupedFeedback.ContainsKey(2) ? groupedFeedback[2].ToString() : "0";
-                    Smiley3Counter.Text = groupedFeedback.ContainsKey(3) ? groupedFeedback[3].ToString() : "0";
-                    Smiley4Counter.Text = groupedFeedback.ContainsKey(4) ? groupedFeedback[4].ToString() : "0";
-                    Smiley5Counter.Text = groupedFeedback.ContainsKey(5) ? groupedFeedback[5].ToString() : "0";
+                    Smiley1Counter.Text = groupedFeedback.ContainsKey(0) ? groupedFeedback[0].ToString() : "0";
+                    Smiley2Counter.Text = groupedFeedback.ContainsKey(1) ? groupedFeedback[1].ToString() : "0";
+                    Smiley3Counter.Text = groupedFeedback.ContainsKey(2) ? groupedFeedback[2].ToString() : "0";
                 });
             }
             catch (HttpRequestException ex)
@@ -52,3 +50,4 @@ namespace ParkbeheerderDashboard.View
         }
     }
 }
+
