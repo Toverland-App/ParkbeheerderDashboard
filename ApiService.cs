@@ -16,7 +16,7 @@ namespace ParkbeheerderDashboard.Models
         {
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://i558324.luna.fhict.nl")
+                BaseAddress = new Uri("https://localhost:7129/")
             };
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
