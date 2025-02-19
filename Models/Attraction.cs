@@ -1,3 +1,5 @@
+using System;
+
 public class Attraction
 {
     private int _id;
@@ -20,7 +22,17 @@ public class Attraction
     public string Name
     {
         get { return _name; }
-        set { _name = value; }
+        set
+        {
+            if (value.Length > 3)
+            {
+                _name = value;
+            }
+            else
+            {
+                throw new ArgumentException("Name must be more than 3 characters.");
+            }
+        }
     }
 
     public double MinHeight
